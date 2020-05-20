@@ -1,11 +1,11 @@
 <template>
-  <div class="message-wrap">
-    <i class="iconfont icon-icon03-copy"></i>
+  <div class="individuality-wrap">
+    individuality
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 @Component
-export default class Message extends Vue {}
+export default class Individuality extends Vue {}
 </script>

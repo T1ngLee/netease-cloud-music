@@ -2,26 +2,49 @@
   <div class="search-bar-wrap">
     <div class="input-box">
       <input type="text" class="search-input" :placeholder="isFocus ? '' : '搜索音乐，视频，歌词，电台'"
-      @focus="isFocus = true" @blur="isFocus = false">
+      @focus="isFocus = true" @blur="isFocus = false" autocomplete="off" spellcheck="false">
       <i class="iconfont icon-fangdajing" :class="{'focused': isFocus}"></i>
+    </div>
+    <div class="search-tip" v-show="isFocus">
+      <div class="triangle"></div>
+      <div class="search-history">
+        <div class="title">搜索历史
+          <i class="iconfont icon-shanchu"></i>
+        </div>
+      </div>
+      <div class="search-hot">
+        <!-- iconType 2-上升 5-NEW 1-HOT 0-NULL  -->
+        <div class="title">热搜榜</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import axios from 'axios'
 @Component
 export default class SearchBar extends Vue {
   isFocus = false
+  mounted(){
+    // axios({
+    //   url: 'http://192.168.5.159:3000/search/hot/detail'
+    // }).then(res => {
+    //   console.log(res);
+    // }).catch(err => {
+    //   console.log(err);
+    // })
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .search-bar-wrap {
   height: 100%;
-  width: 200px;
+  width: 250px;
   display: flex;
   align-items: center;
+  position: relative;
   .input-box {
     width: 100%;
     height: 20px;
@@ -50,6 +73,25 @@ export default class SearchBar extends Vue {
       &.focused {
         color: white;
       }
+    }
+  }
+  .search-tip {
+    position: absolute;
+    width: 400px;
+    min-height: 100px;
+    background-color: rgb(250, 250, 250);
+    top: 100%;
+    box-shadow: 0 1px 8px 3px rgba($color: #000000, $alpha: 0.1);
+    .triangle {
+      position: absolute;
+      height: 0;
+      width: 0;
+      border: 8px solid rgb(250, 250, 250);
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      top: -16px;
+      left: 16px;
     }
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="right-content-wrap">
-    内容区
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -16,5 +18,10 @@ export default class RightContent extends Vue {}
   height: 100%;
   background-color: rgb(250, 250, 250);
   padding-left: 200px;
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+  }
 }
 </style>

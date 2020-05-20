@@ -1,12 +1,17 @@
 <template>
   <div class="left-menu-wrap">
-    菜单区
+    <recommend-menu/>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-@Component
+import RecommendMenu from '@/components/left_menu/recommend_menu.vue'
+@Component({
+  components: {
+    RecommendMenu
+  }
+})
 export default class LeftMenu extends Vue {}
 </script>
 

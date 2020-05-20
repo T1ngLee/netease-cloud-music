@@ -18,6 +18,18 @@ Vue.use(VueRouter)
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
+  {
+    path: '/discover',
+    name: 'Discover',
+    component: () => import('@/views/right_content/discover.vue'),
+    children: [
+      {
+        path: '/discover/individuality',
+        name: 'Individuality',
+        component: () => import('@/views/right_content/discover/individuality.vue')
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
