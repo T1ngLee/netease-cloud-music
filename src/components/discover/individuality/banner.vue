@@ -42,7 +42,7 @@ export default class Banner extends Vue {
     })
   }
   mounted() {
-    this.interval()
+    // this.interval()
   }
   handleClass() {
     for(let i=0;i<this.bannersList.length;i++){
@@ -96,97 +96,97 @@ export default class Banner extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.item {
-  height: 200px;
-  width: 400px;
-  background: red;
-  position: absolute;
-  font-size: 50px;
-  background: green;
-  visibility: hidden;
-  top: 0;
-  left: 0;
-  img {
-    height: 100%;
-    width: 100%;
-  }
-}
-
-.img-list {
-  margin: 0 auto;
-  height: 200px;
-  width: 400px;
+.banner-wrap {
   position: relative;
-}
-
-
-// .center,
-// .left,
-// .right {
-//   height: 200px;
-//   width: 400px;
-// }
-.center {
-  top: 0;
-  // bottom: 0;
-  left: 0;
-  z-index: 2;
-  transform-origin: bottom;
-  transform: scale(1.1);
-  
-  background: red;
-  transition: all 2s ease;
-  visibility: visible;
-  
-}
-
-.left {
-  top: 0;
-  left: -200px;
-  background: yellow;
-  transition: all 2s ease;
-  visibility: visible;
-  // transform-origin: bottom;
-  // transform: scale(0.9);
-}
-
-.right {
-  top: 0;
-  left: 200px;
-  background: blue;
-  visibility: visible;
-  transition: all 2s ease;
-  // transform-origin: bottom;
-  // transform: scale(0.9);
-}
-.btn-list {
-  display: flex;
-  width: 400px;
-  margin: 0 auto;
-  justify-content: space-between;
-  margin-top: 20px
-}
-.btn {
-  height: 5px;
-  width: 20px;
-  border: 1px solid #000;
-}
-.btn.active {
-  background: red;
-}
-.after-btn,
-.before-btn {
-  position: absolute;
-  height: 100%;
-  width: 200px;
-  background: rgba(0,0,0,.2);
-}
-.after-btn{
-  left: -200px;
-  z-index: 1;
-}
-.before-btn{
-  left: 400px;
-  z-index: 1;
+  width: 100%;
+  // background: chartreuse;
+  height: 300px;
+  overflow-x: hidden;
+  .img-list {
+    // margin: 0 auto;
+    // height: 200;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .item {
+      height: 200px;
+      width: 540px;
+      background: red;
+      position: absolute;
+      background: green;
+      visibility: hidden;
+      bottom: 0;
+      left: 50%;
+      transition: all .5s ease;
+      z-index: 0;
+      transform: translateX(-50%);
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    
+    .left {
+      // bottom: 0;
+      left: 0;
+      z-index: 0;
+      background: yellow;
+      transition: all 5s ease;
+      visibility: visible;
+      transform: translateX(0);
+    }
+    .right {
+      // bottom: 0;
+      left: unset;
+      z-index: 1;
+      transform: translateX(0);
+      right: 0;
+      position: absolute;
+      background: blue;
+      visibility: visible;
+      transition: all 5s ease;
+      
+    }
+    .center {
+      z-index: 999;
+      transform-origin: 0 bottom;
+      // left: 50%;
+      // transform: translateX(-50%);
+      transform: scale(1.1) translateX(-50%);
+      background: red;
+      transition: all 5s ease;
+      visibility: visible;
+    }
+  }
+  .btn-list {
+    display: flex;
+    width: 540px;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 20px;
+    .btn {
+      height: 5px;
+      width: 20px;
+      border: 1px solid #000;
+    }
+    .btn.active {
+      background: red;
+    }
+    .after-btn,
+    .before-btn {
+      position: absolute;
+      height: 100%;
+      width: 200px;
+      background: rgba(0,0,0,.2);
+    }
+    .after-btn{
+      left: -200px;
+      z-index: 1;
+    }
+    .before-btn{
+      left: 400px;
+      z-index: 1;
+    }
+  }
 }
 </style>

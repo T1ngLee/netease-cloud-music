@@ -38,7 +38,7 @@ export default class DiscoverRouterLink extends Vue {}
     line-height: 40px;
     margin: 0 auto;
     display: flex;
-    width: 400px;
+    width: 500px;
     justify-content: space-between;
     font-size: 13px;
     .link {

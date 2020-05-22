@@ -22,6 +22,7 @@ export default class RightContent extends Vue {}
     width: 100%;
     height: 100%;
     padding: 0 20px;
+    overflow: auto;
   }
 }
 </style>
