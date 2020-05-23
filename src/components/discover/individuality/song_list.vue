@@ -191,7 +191,7 @@ export default class SongList extends Vue {
           position: absolute;
           width: 25px;
           height: 25px;
-          background: rgba($color: #000000, $alpha: 0.4);
+          background: rgba($color: #000000, $alpha: 0.3);
           z-index: 2;
           text-align: center;
           border-radius: 50%;
@@ -200,6 +200,10 @@ export default class SongList extends Vue {
           box-shadow: 0 0 3px 3px rgba($color: #ffffff, $alpha: 0.5);
           opacity: 0;
           transition: all .3s ease;
+          &:hover {
+            background: rgba($color: #000000, $alpha: 0.6);
+            transition: all .3s ease;
+          }
           .iconfont {
             margin-left: 2px;
             color: white;

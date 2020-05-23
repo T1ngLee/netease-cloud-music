@@ -1,6 +1,16 @@
 import request from '@/untils/request.ts'
 
-export const getSongUrl = (params: any): any => {
+export const songInfo = (params: any): any => {
+  return request(
+    {
+      url: '/song/detail',
+      method: 'get',
+      params
+    }
+  )
+}
+
+export const songUrl = (params: any): any => {
   return request(
     {
       url: '/song/url',

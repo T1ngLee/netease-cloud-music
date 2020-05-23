@@ -22,5 +22,6 @@ export default class LeftMenu extends Vue {}
   width: 200px;
   background-color: $background-colors;
   float: left;
+  z-index: 5;
 }
 </style>
