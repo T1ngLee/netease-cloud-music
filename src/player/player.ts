@@ -3,6 +3,7 @@ import store from '@/store'
 import { songUrl } from '@/api/getSong.ts'
 class Player {
   playingSong!: any
+  playIndex = -1
   // constructor(songInfo: object) {
   //   this.playingSong = songInfo
   //   this.playingSong.url = this.getSongUrl(this.playingSong.id)
@@ -15,19 +16,20 @@ class Player {
       console.log(res);
       
       this.playingSong.url = res.data[0].url
-      store.state.songUrl = this.playingSong.url;
+      // store.state.songUrl = this.playingSong.url;
+      store.commit('setPlayingSongs', [this.playingSong.url, this.playIndex])
       // store.commit('setPlayState', true)
     })
   }
 
-  play(songInfo: any) {
-    this.playingSong = songInfo
-    // this.playingSong.url = this.getSongUrl(this.playingSong.id)
+  play(playIndex: number) {
+    console.log(playIndex);
+    this.playIndex = playIndex
+    this.playingSong = store.state.songData.playList[this.playIndex]
+    console.log(store.state.songData.playList);
+    console.log(this.playingSong);
     this.getSongUrl(this.playingSong.id)
     console.log(this.playingSong);
-    
-    // store.state.songUrl = this.playingSong.url;
-    // (store.state.player as any).play()
   }
 }
 

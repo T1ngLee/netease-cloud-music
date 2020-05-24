@@ -2,7 +2,7 @@
   <div class="right-content-wrap">
     <div class="container">
       <router-view></router-view>
-      <play-list/>
+      <play-list v-show="$store.state.playListShowState"/>
     </div>
   </div>
 </template>

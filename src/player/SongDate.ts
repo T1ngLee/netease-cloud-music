@@ -1,13 +1,20 @@
 import SongItem from '@/player/SongItem.ts'
 import { songInfo, songUrl } from '@/api/getSong.ts'
 import Player from '@/player/player.ts'
+import store from '@/store'
 class SongDate {
-  playList: object[] = []
+  playList: object[]
+  
+
   constructor(){
     this.playList = this.getData()
   }
   saveData() {
+    // console.log(this.playList);
+    
     window.localStorage.setItem('playList', JSON.stringify(this.playList))
+    // console.log(this.playList ,'SAVE完成');
+    
   }
 
   getData() {
@@ -18,14 +25,19 @@ class SongDate {
     return JSON.parse(localData as any)
   }
 
-  getSongItem(id: number | number[]){
+  /**
+   * 
+   * @param id 歌曲id，可以是number类型，也可以是数组
+   * @param mode 模式，0：单曲，1：播放歌单，2：添加歌单
+   */
+  getSongItem(id: number | number[], mode: number){
     let idStr: number | string
     if(typeof id == 'number') {
       idStr = id
     } else {
       idStr = id.join(',')
     }
-    console.log(this.playList);
+    // console.log(this.playList);
 
     // let getplayList: Array<SongItem>
     songInfo({
@@ -36,43 +48,50 @@ class SongDate {
       if(res.songs.length === 0) {
         return new Error('没有歌曲信息')
       }
-      // getplayList = res.songs.map((item: any, index: number) => {
-      //   let songItem!: SongItem
-      //   songItem.name = item.name
-      //   songItem.id = item.id
-      //   songItem.alias = item.alia
-      //   songItem.artists = item.ar
-      //   songItem.album = item.al
-      //   songItem.time = item.dt
-      //   return songItem
-      // })
-      // 去重
-      // if (this.playList.length === 0) {
-      //   this.playList = res.songs
-      // } else {
-      //   for (const i of this.playList) {          
-          
-      //   }
-      // }
+
+      // 格式化要显示的时间
       const songsList = res.songs.map((item: any) => {
         item.showTime = this.handleShowTime(item.dt)
         return item
       })
 
-      this.playList = this.playList.concat(res.songs)
-      // const newArr = []
-      // for(const item of this.playList) {
-      //   if(newArr.indexOf())
-      // }
-      const player = new Player()
-      player.play(res.songs[0])
-      // 去重
-      const newArr = new Map();
-      this.playList = this.playList.filter((item) => !newArr.has((item as any).id) && newArr.set((item as any).id, 1))
+      const playIndex = store.state.playIndex
+      let newPlayIndex = -1
+
+      console.log(this.playList)
+      if (this.playList.length === 0 || mode === 1) {
+        this.playList = songsList
+        newPlayIndex = 0
+        console.log(newPlayIndex)
+        console.log('进入akjsgdjakshdjak');
+      } else {
+        console.log('进入else');
+        
+        if (mode === 0) {
+          const index = this.playList.findIndex((item: any) => {
+            return item.id === songsList[0].id
+          })
+          console.log('index', index);
+          
+          if(index !== -1) {
+            newPlayIndex = index
+          } else {
+            const rightArr = this.playList.splice(playIndex + 1, this.playList.length - playIndex + 1)
+            newPlayIndex = this.playList.length
+            this.playList = this.playList.concat(songsList, rightArr)
+          }
+        } else if (mode === 2) {
+          const rightArr = this.playList.splice(playIndex + 1, this.playList.length - playIndex + 1)
+          newPlayIndex = this.playList.length - 1
+          this.playList = this.playList.concat(songsList, rightArr)
+        }
+      }
 
       console.log(this.playList);
-      // const aaa= new Player()
-      // aaa.play(this.playList[1])
+      
+      const player = new Player()
+      player.play(newPlayIndex)
+
       this.saveData()
     }).catch((err: any) => {
       console.log(err)
@@ -80,6 +99,7 @@ class SongDate {
 
     
   }
+  // 将要显示在页面上的时间格式化
   handleShowTime (time: number): string {
     const a = time / 1000 / 60
     let minute: any = Math.floor(a)

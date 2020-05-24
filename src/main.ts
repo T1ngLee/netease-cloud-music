@@ -14,5 +14,5 @@ new Vue({
 }).$mount('#app')
 
 const ppp = new SongDate()
-ppp.getSongItem([405998841,33894312,1447967459])
+ppp.getSongItem([405998841,33894312,1447967459], 1)
 // ppp.saveData()

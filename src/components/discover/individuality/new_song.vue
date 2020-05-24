@@ -107,7 +107,7 @@ export default class NewSong extends Vue {
   }
   // 点击播放按钮
   clickPlayBtn (id: number) {
-    this.$store.state.songData.getSongItem(id)
+    this.$store.state.songData.getSongItem(id, 0)
   }
 }
 </script>
