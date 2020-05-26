@@ -1,7 +1,9 @@
 <template>
   <div class="right-content-wrap">
     <div class="container">
-      <router-view></router-view>
+      <div class="container-width">
+        <router-view></router-view>
+      </div>
       <play-list v-show="$store.state.playListShowState"/>
     </div>
   </div>
@@ -30,7 +32,14 @@ export default class RightContent extends Vue {}
     height: 100%;
     padding: 0 20px;
     overflow: auto;
+    // max-width: 720px;
     // position: relative;
+    .container-width {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      min-width: 720px;
+    }
   }
 }
 </style>

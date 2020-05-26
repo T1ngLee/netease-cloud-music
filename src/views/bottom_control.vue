@@ -1,12 +1,12 @@
 <template>
   <div class="bottom-control-wrap">
     <div class="play-btn">
-      <span class="before-btn iconfont icon-shangyishou"></span>
+      <span class="before-btn iconfont icon-shangyishou" @click="before()"></span>
       <div class="center-btn-box">
         <span class="play-btn iconfont icon-bofang1" @click="changePlayState()" v-show="!$store.state.playState"></span>
         <span class="pause-btn iconfont icon-zantingtingzhi" @click="changePlayState()" v-show="$store.state.playState"></span>
       </div>
-      <span class="after-btn iconfont icon-xiayishou"></span>
+      <span class="after-btn iconfont icon-xiayishou" @click="after()"></span>
     </div>
     <!-- <button @click="aaa()">asdasd</button> -->
     <!-- <button @click="changePlayListShowState()">列表</button> -->
@@ -20,12 +20,30 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import SongProgress from '@/components/bottom_control/song_progress.vue'
+import Player from '@/player/player.ts'
 @Component({
   components: {
     SongProgress
   }
 })
 export default class BottomControl extends Vue {
+  player = new Player()
+  before(){
+    if(this.$store.state.playerMode === 2){
+      this.player.randomCut()
+    } else {
+      this.player.before()
+    }
+  }
+
+  after(){
+    if(this.$store.state.playerMode === 2){
+      this.player.randomCut()
+    } else {
+      this.player.after()
+    }
+  }
+
   changePlayState(){
     if (this.$store.state.playState) {
       this.$store.commit('setPlayState', false)

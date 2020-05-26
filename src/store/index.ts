@@ -16,7 +16,8 @@ export default new Vuex.Store({
       currentTime: '00:00',
       duration: '00:00',
       progress: '0%'
-    }
+    },
+    playerMode: 2
   },
   mutations: {
     setPlayState(state, val){

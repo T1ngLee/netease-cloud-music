@@ -1,8 +1,8 @@
 <template>
   <div class="song-progress-wrap">
-    <span class="now-time">{{progress.currentTime || '00:00'}}</span>
+    <span class="now-time">{{progress.currentTime || 0 | handleShowTime}}</span>
     <progress-bar  class="progress-bar" :progressBarWidth="'80%'" :nowProgress="progress.progress"/>
-    <span class="all-time">{{progress.duration || '00:00'}}</span>
+    <span class="all-time">{{progress.duration || 0 | handleShowTime}}</span>
   </div>
 </template>
 
@@ -12,6 +12,21 @@ import ProgressBar from '@/components/common/progress_bar.vue'
 @Component({
   components: {
     ProgressBar
+  },
+  filters: {
+    handleShowTime (time: number): string {
+      const a = time / 60
+      let minute: any = Math.floor(a)
+      let second: any = Math.floor(60 * parseFloat(0 + '.' + a.toString().split('.')[1]))
+      if (minute < 10) {
+        minute = '0' + minute
+      }
+
+      if (second < 10) {
+        second = '0' + second
+      }
+      return minute + ':' + second
+    }
   }
 })
 export default class SongProgress extends Vue {

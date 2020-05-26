@@ -19,3 +19,13 @@ export const songUrl = (params: any): any => {
     }
   )
 }
+
+export const songLyric = (params: any): any => {
+  return request(
+    {
+      url: '/lyric',
+      method: 'get',
+      params
+    }
+  )
+}
