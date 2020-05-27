@@ -1,7 +1,11 @@
 <template>
   <div class="max-detail-top-wrap">
-    <detail-disc/>
-    <song-info/>
+    <div class="box">
+      <detail-disc/>
+      <song-info/>
+    </div>
+    <!-- <detail-disc/>
+    <song-info/> -->
   </div>
 </template>
 
@@ -22,7 +26,12 @@ export default class MaxDetailTop extends Vue {}
 .max-detail-top-wrap {
   width: 100vw;
   height: 480px;
-  background: cadetblue;
-  display: flex;
+  // background: cadetblue;
+  .box {
+    width: 910px;
+    display: flex;
+    margin: 0 auto;
+    height: 100%;
+  }
 }
 </style>

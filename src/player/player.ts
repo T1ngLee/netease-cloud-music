@@ -23,10 +23,10 @@ class Player {
   }
 
   play(playIndex: number) {
-    // console.log(playIndex);
+    console.log(playIndex);
     this.playIndex = playIndex
     this.playingSong = store.state.songData.playList[this.playIndex]
-    // console.log(store.state.songData.playList);
+    console.log(store.state.songData.playList);
     // console.log(this.playingSong);
     this.getSongUrl(this.playingSong.id)
     // console.log(this.playingSong);
@@ -34,21 +34,22 @@ class Player {
   // 自动切歌
   autoCut () {
     switch(store.state.playerMode){
-      case 0:
+      case 0: // 顺序播放
         this.before()
         break;
-      case 1:
+      case 1: // 列表循环
         this.before()
         break;
-      case 2:
+      case 2: // 随机播放
         this.randomCut()
         break;
-      case 3:
+      case 3: // 单曲循环？？？？？？？？？？？？？？？？？
+
         this.play(store.state.playIndex)
         break;
     }
   }
-
+  // 上一首
   before(){
     if(store.state.playIndex === 0) {
       this.play(store.state.songData.playList.length-1)
@@ -56,7 +57,7 @@ class Player {
       this.play(store.state.playIndex-1)
     }
   }
-
+  // 下一首
   after(){
     if(store.state.playIndex >= store.state.songData.playList.length-1) {
       this.play(0)
@@ -64,13 +65,13 @@ class Player {
       this.play(store.state.playIndex+1)
     }
   }
-
+  // 随机切
   randomCut(): any{
     const randomNum = parseInt((Math.random()*store.state.songData.playList.length) as any)
     if(randomNum === store.state.playIndex) {
       return this.randomCut()
     }
-    console.log(randomNum);
+    // console.log(randomNum);
     
     this.play(randomNum)
   }

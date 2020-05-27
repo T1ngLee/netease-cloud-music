@@ -59,6 +59,7 @@ export default class TopBar extends Vue {}
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 10;
   h1 {
     font-size: 0;
     height: 25px;

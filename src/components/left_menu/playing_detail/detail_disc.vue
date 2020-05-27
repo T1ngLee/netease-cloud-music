@@ -1,10 +1,11 @@
 <template>
   <div class="detail-disc-wrap">
-    <div class="pointer playing">
-      <img src="../../../assets/pointer.png">
-      
+    <div class="pointer-box" :class="{playing: playing}">
+      <div class="pointer">
+        <img src="../../../assets/pointer.png">
+      </div>
     </div>
-    <div class="disc-box playing">
+    <div class="disc-box" :class="playing ? 'playing' : 'paused'" ref="discBox">
       <img class="cover" src="https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400">
       <img class="disc" src="../../../assets/disc.png">
     </div>
@@ -12,32 +13,78 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 @Component
-export default class DetailDisc extends Vue {}
+export default class DetailDisc extends Vue {
+  playing = false
+  aaa = 0
+  @Watch('$store.state.playState')
+  isPlaying(val: boolean){
+    this.playing = val
+    // console.dir(this.$refs.discBox);
+    const  el = this.$refs.discBox
+    const  st = window.getComputedStyle(el as any, null);
+    const  tr = st.getPropertyValue("-webkit-transform") ||
+        st.getPropertyValue("-moz-transform") ||
+        st.getPropertyValue("-ms-transform") ||
+        st.getPropertyValue("-o-transform") ||
+        st.getPropertyValue("transform") ||
+        "FAIL";
+
+    // console.log('Matrix: ' + tr);
+    const  values = tr.split('(')[1].split(')')[0].split(',');
+    const  a: any = values[0];
+    const  b: any = values[1];
+    const  c: any = values[2];
+    const  d: any = values[3];
+    const  scale = Math.sqrt(a * a + b * b);
+    // console.log('Scale: ' + scale);
+    // arc sin, convert from radians to degrees, round
+    const  sin = b / scale;
+    // next line works for 30deg but not 130deg (returns 50);
+    // const angle = Math.round(Math.asin(sin) * (180/Math.PI));
+    let  angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+    if(angle < 0) {
+      angle = 180 + angle + 180
+    }
+    console.log('Rotate: ' + angle + 'deg');
+    this.aaa = angle
+
+    // console.log(document.styleSheets);
+    // const style = document.styleSheets[0];
+    // style.insertRule("@keyframes rotate{from{ transform: translate(0%,0%); }to{ transform: translate(0%,-"+param +"%);}}",9)
+    
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .detail-disc-wrap {
   height: 100%;
   width: 330px;
-  background: olivedrab;
   position: relative;
-  .pointer {
+  .pointer-box {
     position: absolute;
-    transform: scale(0.43) rotate(-11deg) translateX(-100px);
-    transform-origin: 20px 20px;
-    transition: all 0.5s ease;
-    top: -25px;
+    width: 30px;
+    height: 30px;
     left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%) rotate(0);
+    transform-origin: 15px 15px;
     z-index: 1;
-    // transform: ;
-    // rotate: ;
+    transition: all 0.5s ease;
     &.playing {
-      transform: scale(0.43) rotate(20deg) translateX(-50px);
+      transform: translate(-50%, -50%) rotate(38deg);
       transition: all 0.5s ease;
     }
+    .pointer {
+      position: absolute;
+      transform: scale(0.50) rotate(-11deg);
+      top: -69px;
+      left: -78px;
+    }
   }
+  
   .disc-box {
     width: 320px;
     height: 320px;
@@ -45,13 +92,13 @@ export default class DetailDisc extends Vue {}
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // background: orange;
     border-radius: 50%;
     box-shadow: 0 0 0 5px rgba($color: #ffffff, $alpha: .3);
     &.playing {
-      // transform: rotate(360deg) translate(-50%, -50%);
-      // transition: rotate 5s ease infinite;
       animation: rotate 5s linear infinite;
+    }
+    &.paused {
+      animation-play-state:paused;
     }
     img {
       position: absolute;

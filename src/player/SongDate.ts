@@ -88,11 +88,11 @@ class SongDate {
       }
 
       console.log(this.playList);
-      
+      this.saveData()
       const player = new Player()
       player.play(newPlayIndex)
 
-      this.saveData()
+      // this.saveData()
     }).catch((err: any) => {
       console.log(err)
     })
