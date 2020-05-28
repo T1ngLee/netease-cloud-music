@@ -10,8 +10,12 @@
     </div>
     <!-- <button @click="aaa()">asdasd</button> -->
     <!-- <button @click="changePlayListShowState()">列表</button> -->
+    <song-progress class="song-progress"/>
     <div class="right-box">
-      <song-progress/>
+      <volume-bar/>
+      <play-mode/>
+      <desktop-lyric/>
+      <song-list-btn/>
     </div>
     
   </div>
@@ -21,9 +25,17 @@
 import { Vue, Component } from 'vue-property-decorator'
 import SongProgress from '@/components/bottom_control/song_progress.vue'
 import Player from '@/player/player.ts'
+import VolumeBar from '@/components/bottom_control/volume_bar.vue'
+import PlayMode from '@/components/bottom_control/play_mode.vue'
+import DesktopLyric from '@/components/bottom_control/desktop_lyric.vue'
+import SongListBtn from '@/components/bottom_control/song_list_btn.vue'
 @Component({
   components: {
-    SongProgress
+    SongProgress,
+    VolumeBar,
+    PlayMode,
+    DesktopLyric,
+    SongListBtn
   }
 })
 export default class BottomControl extends Vue {
@@ -68,15 +80,17 @@ export default class BottomControl extends Vue {
   bottom: 0;
   z-index: 10;
   border-top: 1px solid rgb(230,231,234);
+  display: flex;
   .play-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
     width: 200px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    flex: 0 0 200px;
     .iconfont {
       font-size: 25px;
       margin-top: 17px;
@@ -99,14 +113,19 @@ export default class BottomControl extends Vue {
       }
     }
   }
+  .song-progress{
+    flex: 1 1;
+  }
   .right-box {
-    position: absolute;
+    padding-left: 15px;
     top: 0;
     left: 200px;
     // padding-left: 200px;
     // background: yellow;
     width: calc(100% - 200px);
     height: 100%;
+    flex: 0 0 300px;
+    display: flex;
   }
 }
 </style>

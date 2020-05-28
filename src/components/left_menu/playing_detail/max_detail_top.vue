@@ -26,7 +26,38 @@ export default class MaxDetailTop extends Vue {}
 .max-detail-top-wrap {
   width: 100vw;
   height: 480px;
+  overflow: hidden;
   // background: cadetblue;
+  // background: url('https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400');
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center;
+  position: relative;
+  // filter: blur(20px);
+  &::before{
+    content: '';
+    position: absolute;
+    background: url('https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    filter: blur(10px);
+    // z-index: -1;
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    background: linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,.4),rgba(255,255,255,.9));
+    filter: blur(10px);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
   .box {
     width: 910px;
     display: flex;

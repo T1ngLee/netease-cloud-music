@@ -48,8 +48,9 @@ export default class SongInfo extends Vue {
 .song-info-wrap {
   width: 480px;
   height: 100%;
-  background: salmon;
+  // background: salmon;
   margin-left: 100px;
+  z-index: 5;
   // over
   .info-top {
     padding-top: 25px;

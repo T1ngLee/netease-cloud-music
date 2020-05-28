@@ -15,9 +15,10 @@ export default new Vuex.Store({
     songProgress: {
       currentTime: '00:00',
       duration: '00:00',
-      progress: '0%'
+      progress: '0'
     },
-    playerMode: 2
+    playerMode: 2,
+    newProgress: 0
   },
   mutations: {
     setPlayState(state, val){
@@ -32,6 +33,12 @@ export default new Vuex.Store({
     },
     setSongProgress(state, obj) {
       state.songProgress = obj
+    },
+    setPlayerMode (state, val) {
+      state.playerMode = val
+    },
+    setNewProgress(state, val){
+      state.newProgress = val
     }
   },
   actions: {

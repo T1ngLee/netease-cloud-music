@@ -1,22 +1,22 @@
 <template>
   <div class="discover-router-link-wrap">
     <ul class="link-list">
-      <router-link tag="li" to="/discover/individuality" class="link individuality" active-class="active">
+      <router-link tag="li" :to="{name: 'Individuality'}" class="link individuality" active-class="active">
         个性推荐
       </router-link>
-      <router-link tag="li" to="/discover/aa" class="link song-list" active-class="active">
+      <router-link tag="li" :to="{name: 'SongList'}" class="link song-list" active-class="active">
         歌单
       </router-link>
-      <router-link tag="li" to="/discover/aa" class="link transceiver" active-class="active">
+      <router-link tag="li" :to="{name: 'Anchor'}" class="link transceiver" active-class="active">
         主播电台
       </router-link>
-      <router-link tag="li" to="/discover/aa" class="link ranking-list" active-class="active">
+      <router-link tag="li" :to="{name: 'RankingList'}" class="link ranking-list" active-class="active">
         排行榜
       </router-link>
-      <router-link tag="li" to="/discover/aa" class="link singer" active-class="active">
+      <router-link tag="li" :to="{name: 'Singer'}" class="link singer" active-class="active">
         歌手
       </router-link>
-      <router-link tag="li" to="/discover/aa" class="link new-song" active-class="active">
+      <router-link tag="li" :to="{name: 'NewSong'}" class="link new-song" active-class="active">
         最新音乐
       </router-link>
     </ul>

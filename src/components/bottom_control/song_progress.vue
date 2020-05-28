@@ -1,7 +1,7 @@
 <template>
   <div class="song-progress-wrap">
     <span class="now-time">{{progress.currentTime || 0 | handleShowTime}}</span>
-    <progress-bar  class="progress-bar" :progressBarWidth="'80%'" :nowProgress="progress.progress"/>
+    <progress-bar  class="progress-bar" :progressBarWidth="'100%'" :nowProgress="progress.progress" @getProgress="getProgress"/>
     <span class="all-time">{{progress.duration || 0 | handleShowTime}}</span>
   </div>
 </template>
@@ -36,20 +36,22 @@ export default class SongProgress extends Vue {
     console.log('正在监听')
     this.progress = val
   }
+
+  getProgress(progress: number){
+    console.log('father: ', progress)
+    this.$store.commit('setNewProgress', progress)
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .song-progress-wrap {
   font-size: 11px;
-  width: 80%;
-  position: absolute;
+  width: 100%;
   height: 100%;
-  // left: 200px;
   display: flex;
   align-items: center;
   .progress-bar {
-    display: inline-block;
     margin: 0 15px;
   }
 }

@@ -97,7 +97,7 @@ export default class Lyric extends Vue {
 
 <style lang="scss" scoped>
 .lyric-wrap {
-  background: royalblue;
+  // background: royalblue;
   height: 100%;
   padding-top: 20px;
   .lyric-box{

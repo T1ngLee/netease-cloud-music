@@ -60,6 +60,15 @@ export default class AudioWrap extends Vue {
     }, 1000)
   }
 
+  // 监听进度条设置的进度
+  // @Watch('$store.state.newProgress')
+  //  listenNewProgress(val: number) {
+  //    if
+  //  }
+  // 监听音量
+  // listenVolume(){
+
+  // }
 }
 </script>
 

@@ -35,6 +35,7 @@ export default class PlayingDetail extends Vue {
 
 <style lang="scss" scoped>
 .playing-detail-wrap{
+  overflow: hidden;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -92,8 +93,6 @@ export default class PlayingDetail extends Vue {
     transition: all .1s ease;
     .mini-detail {
       visibility: hidden;
-      // height: 0;
-      // width: 0;
       display: none;
     }
   }
