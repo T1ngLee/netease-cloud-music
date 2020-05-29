@@ -51,7 +51,7 @@ export default class MaxDetailTop extends Vue {}
   &::after{
     content: '';
     position: absolute;
-    background: linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,.4),rgba(255,255,255,.9));
+    background: linear-gradient(90deg,rgba(255,255,255,.9), rgba(255,255,255,.8), rgba(255,255,255,.4), rgba(255,255,255,.8), rgba(255,255,255,.9));
     filter: blur(10px);
     left: 0;
     right: 0;
