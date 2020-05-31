@@ -16,6 +16,7 @@
     <div class="max-detail">
       <max-detail-top/>
       <button @click="isMax = !isMax">asdasd</button>
+      <max-detail-bottom/>
     </div>
   </div>
 </template>
@@ -23,13 +24,16 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import MaxDetailTop from '@/components/left_menu/playing_detail/max_detail_top.vue'
+import MaxDetailBottom from '@/components/left_menu/playing_detail/max_detail_bottom.vue'
 @Component({
   components: {
-    MaxDetailTop
+    MaxDetailTop,
+    MaxDetailBottom
   }
 })
 export default class PlayingDetail extends Vue {
   isMax = false
+
 }
 </script>
 
@@ -85,6 +89,10 @@ export default class PlayingDetail extends Vue {
         }
       }
     }
+  }
+  .max-detail {
+    height: 100%;
+    overflow-x: auto;
   }
   &.max {
     height: 100%;

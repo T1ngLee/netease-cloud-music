@@ -1,17 +1,17 @@
 <template>
   <div class="song-info-wrap">
     <div class="info-top" ref="infoTop">
-      <h3 class="song-name">{{lll}}</h3>
-      <div class="alias">{{lll}}</div>
+      <h3 class="song-name">{{$store.state.playingSong.name}}</h3>
+      <div class="alias">{{$store.state.playingSong.alia[0]}}</div>
       <div class="other">
         <span class="album">
-          专辑: {{lll}}
+          专辑: {{$store.state.playingSong.al.name}}
         </span>
         <span class="artists">
-          歌手: {{lll}}
+          歌手: {{$store.state.playingSong.artistStr}}
         </span>
         <span class="source">
-          来源: {{lll}}
+          来源: 来源
         </span>
       </div>
     </div>
@@ -28,7 +28,7 @@ import Lyric from '@/components/left_menu/playing_detail/lyric.vue'
   }
 })
 export default class SongInfo extends Vue {
-  lll = '一起走过的日子'
+  // lll = '一起走过的日子'
   lyricHeight = '0px'
   mounted(){
     this.getLyricHeight()
@@ -62,6 +62,9 @@ export default class SongInfo extends Vue {
     .alias {
       font-size: 14px;
       margin-top: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .other {
       font-size: 12px;

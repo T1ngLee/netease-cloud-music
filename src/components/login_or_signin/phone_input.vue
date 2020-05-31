@@ -6,7 +6,7 @@
         <span class="now-area-code">+86</span>
         <span class="triangle"></span>
       </div>
-      <input type="text" placeholder="请输入手机号" class="phone-input">
+      <input type="text" placeholder="请输入手机号" class="phone-input" @blur="pushParentPhone($event.target.value, 0)">
       <ul class="area-code-list" v-if="false">
         <li class="area-code-item" v-for="i in 10" :key="i">
           <div class="left">
@@ -19,7 +19,7 @@
     </div>
     <div class="pwd">
       <span class="iconfont icon-suo"></span>
-      <input type="password" class="pwd-input">
+      <input type="password" class="pwd-input" @blur="pushParentPhone($event.target.value, 1)">
       <span class="reset-pwd">重设密码</span>
     </div>
   </div>
@@ -29,7 +29,13 @@
 import { Vue, Component } from 'vue-property-decorator'
 @Component
 export default class PhoneInput extends Vue {
+  pushParentPhone(val: any, type: number){
+    this.$emit('getChildData', val, type)
+    // console.log(event.target.value, type)
+  }
+  // pushParentPwd(){
 
+  // }
 }
 </script>
 

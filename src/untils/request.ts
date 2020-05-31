@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const service = axios.create({
   baseURL: 'http://192.168.5.169:3000',
-  timeout: 5000
+  timeout: 5000,
+  withCredentials: true
 })
 
 service.interceptors.request.use(

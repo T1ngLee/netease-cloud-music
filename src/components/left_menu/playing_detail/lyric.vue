@@ -25,20 +25,28 @@ export default class Lyric extends Vue {
   translateLyric: object[] = []
   lyricList: object[] = []
   backupLyricList: object[] = []
+  playingSongId = -1
   mounted() {
-    this.getLyric()
+    this.playingSongId = this.$store.state.songData.playList[this.$store.state.playIndex].id
+    this.getLyric(this.playingSongId)
   }
 
-  getLyric(){
+  @Watch('$store.state.playIndex')
+  getNewLyric(val: number){
+    this.playingSongId = this.$store.state.songData.playList[val].id
+    this.getLyric(this.playingSongId)
+    this.showIndex = -1
+  }
+
+  getLyric(id: number){
     songLyric({
-      id: this.$store.state.songData.playList[this.$store.state.playIndex].id
+      id: id
     }).then((res: any) => {
       this.lyricList = this.moduleLyric(res.lrc.lyric, true)
-      this.translateLyric = this.moduleLyric(res.tlyric.lyric, false)
-      console.log(this.lyricList);
-      console.log(this.translateLyric);
-      console.log(this.backupLyricList);
-      
+      // this.translateLyric = this.moduleLyric(res.tlyric.lyric, false)
+      // console.log(this.lyricList);
+      // console.log(this.translateLyric);
+      // console.log(this.backupLyricList);
     })
   }
 
@@ -68,7 +76,6 @@ export default class Lyric extends Vue {
     return minute + second
   }
   showIndex = -1
-  // nowTime = 0
   @Watch('$store.state.songProgress.currentTime')
   lyricAnimation(val: any){
     // console.log(typeof val);
@@ -77,7 +84,6 @@ export default class Lyric extends Vue {
       this.showIndex ++
       this.lyricList.shift()
     } 
-    // console.log(this.lyricMove);
     this.lyricMove()
     
   }
@@ -102,7 +108,9 @@ export default class Lyric extends Vue {
   padding-top: 20px;
   .lyric-box{
     height: 100%;
+    // height: 50%;
     overflow: auto;
+    border-right: 1px solid rgb(192, 193, 194);
     .lyric-list {
     font-size: 14px;
     // transform: translateY(-200px);

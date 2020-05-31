@@ -2,7 +2,7 @@
   <div class="app-wrap">
     <!-- <audio src="http://m7.music.126.net/20200520204148/690d680b336c3776fe049d683acefa76/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/2585012073/9c43/5b38/5503/484bc8813effa5d9e450ccc70bbf4f90.mp3"></audio> -->
     <audio-wrap />
-    <LoginOrSignIN/>
+    <LoginOrSignIN v-if="loginBoxShow"/>
     <top-bar/>
     <div class="center-box">
       <left-menu/>
@@ -20,6 +20,7 @@ import LeftMenu from '@/views/left_menu.vue'
 import RightContent from '@/views/right_content.vue'
 import AudioWrap from '@/views/audio.vue'
 import LoginOrSignIN from '@/components/common/login_or_signin.vue'
+import LoginInfo from '@/mixins/LoginInfo.ts'
 @Component({
   components: {
     TopBar,
@@ -28,9 +29,18 @@ import LoginOrSignIN from '@/components/common/login_or_signin.vue'
     RightContent,
     AudioWrap,
     LoginOrSignIN
-  }
+  },
+  mixins: [LoginInfo]
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  get loginBoxShow(): boolean {
+    if(!this.$store.state.loginState && this.$store.state.loginBoxShow) {
+      return true
+    }
+    return false
+  }
+
+}
 </script>
 
 <style lang="scss" scoped>

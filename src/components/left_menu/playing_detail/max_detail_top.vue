@@ -1,16 +1,15 @@
 <template>
   <div class="max-detail-top-wrap">
+    <div class="bg" ref="bg" :style="{background: `url(${$store.state.playingSong.al.picUrl})`}"></div>
     <div class="box">
       <detail-disc/>
       <song-info/>
     </div>
-    <!-- <detail-disc/>
-    <song-info/> -->
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import DetailDisc from '@/components/left_menu/playing_detail/detail_disc.vue'
 import SongInfo from '@/components/left_menu/playing_detail/song_info.vue'
 @Component({
@@ -19,7 +18,16 @@ import SongInfo from '@/components/left_menu/playing_detail/song_info.vue'
     SongInfo
   }
 })
-export default class MaxDetailTop extends Vue {}
+export default class MaxDetailTop extends Vue {
+  // playingSongInfo = 
+
+  // @Watch('$store.state.playingSong.al.picUrl')
+  // getPlayingSongInfo(val: number){
+  //   this.$refs.bg.style.backgroundImage = 
+  // }
+
+  // get playingSong
+}
 </script>
 
 <style lang="scss" scoped>
@@ -27,17 +35,11 @@ export default class MaxDetailTop extends Vue {}
   width: 100vw;
   height: 480px;
   overflow: hidden;
-  // background: cadetblue;
-  // background: url('https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400');
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: center;
   position: relative;
-  // filter: blur(20px);
-  &::before{
-    content: '';
+  .bg{
+    // content: '';
     position: absolute;
-    background: url('https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400');
+    // background: url('https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

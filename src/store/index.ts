@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     songUrl: '',
     player: '',
+    playingSong: {},
     playState: false,
     songData: new SongDate(),
     playIndex: 2,
@@ -18,7 +19,10 @@ export default new Vuex.Store({
       progress: '0'
     },
     playerMode: 2,
-    newProgress: 0
+    newProgress: 0,
+    loginState: false,
+    loginBoxShow: false,
+    userInfo: {}
   },
   mutations: {
     setPlayState(state, val){
@@ -30,6 +34,7 @@ export default new Vuex.Store({
     setPlayingSongs(state, argument){
       state.songUrl = argument[0]
       state.playIndex = argument[1]
+      state.playingSong = argument[2]
     },
     setSongProgress(state, obj) {
       state.songProgress = obj
@@ -39,6 +44,15 @@ export default new Vuex.Store({
     },
     setNewProgress(state, val){
       state.newProgress = val
+    },
+    setLoginState(state, val){
+      state.loginState = val
+    },
+    setLoginBoxShow(state, val) {
+      state.loginBoxShow = val
+    },
+    setUserInfo(state, val) {
+      state.userInfo = val
     }
   },
   actions: {

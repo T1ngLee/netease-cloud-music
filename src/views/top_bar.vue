@@ -60,6 +60,7 @@ export default class TopBar extends Vue {}
   align-items: center;
   position: relative;
   z-index: 10;
+  min-width: 960px;
   h1 {
     font-size: 0;
     height: 25px;
@@ -76,14 +77,15 @@ export default class TopBar extends Vue {}
     right: 10px;
     font-size: 12px;
     color: rgb(238, 193, 193);
+    height: 100%;
     & > * {
       padding: 0 5px;
       display: flex;
       align-items: center;
-      cursor: pointer;
-      &:hover {
-        color: white;
-      }
+      // cursor: pointer;
+    //   &:hover {
+    //     color: white;
+    //   }
     }
     .iconfont {
       display: inline-block;

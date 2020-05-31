@@ -9,3 +9,13 @@ export const loginByPhone = (params: any) => {
     }
   )
 }
+
+export const loginStatus = (params: any = '') => {
+  return request(
+    {
+      url: '/login/status',
+      method: 'get',
+      params
+    }
+  )
+}

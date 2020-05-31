@@ -52,6 +52,7 @@ class SongDate {
       // 格式化要显示的时间
       const songsList = res.songs.map((item: any) => {
         item.showTime = this.handleShowTime(item.dt)
+        item.artistStr = this.handleArtists(item.ar)
         return item
       })
 
@@ -112,6 +113,18 @@ class SongDate {
       second = '0' + second
     }
     return minute + ':' + second
+  }
+
+  // 处理艺术家
+  handleArtists(artists: any): string {
+    if (artists.length === 1) {
+      return artists[0].name
+    }
+    let artistString = ''
+    for(const item of artists) {
+      artistString = artistString + item.name + ' / '
+    }
+    return artistString.substring(0, artistString.length-3)
   }
 }
 

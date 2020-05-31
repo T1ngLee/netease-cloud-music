@@ -53,7 +53,16 @@ Vue.use(VueRouter)
         name: 'NewSong',
         component: () => import('@/views/right_content/discover/new_song.vue')
       }
-    ]
+    ],
+    redirect: {
+      name: 'Individuality'
+    }
+  },
+  {
+    path: '/',
+    redirect: {
+      name: 'Individuality'
+    }
   }
 ]
 

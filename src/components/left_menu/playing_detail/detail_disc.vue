@@ -1,12 +1,12 @@
 <template>
   <div class="detail-disc-wrap">
-    <div class="pointer-box" :class="{playing: playing}">
+    <div class="pointer-box" :class="{playing: $store.state.playState}">
       <div class="pointer">
         <img src="../../../assets/pointer.png">
       </div>
     </div>
-    <div class="disc-box" :class="{paused: !playing}" ref="discBox">
-      <img class="cover" src="https://p1.music.126.net/2Vka20mvOC7MLZcrBsbnUA==/109951165001127531.jpg?param=400y400">
+    <div class="disc-box" :class="{paused: !$store.state.playState}" ref="discBox">
+      <img class="cover" :src="$store.state.playingSong.al.picUrl">
       <img class="disc" src="../../../assets/disc.png">
     </div>
   </div>
@@ -16,11 +16,6 @@
 import { Vue, Component, Watch } from 'vue-property-decorator'
 @Component
 export default class DetailDisc extends Vue {
-  playing = false
-  @Watch('$store.state.playState')
-  isPlaying(val: boolean){
-    this.playing = val
-  }
 }
 </script>
 

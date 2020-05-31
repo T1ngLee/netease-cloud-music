@@ -81,6 +81,7 @@ export default class BottomControl extends Vue {
   z-index: 10;
   border-top: 1px solid rgb(230,231,234);
   display: flex;
+  min-width: 960px;
   .play-btn {
     // position: absolute;
     // top: 0;

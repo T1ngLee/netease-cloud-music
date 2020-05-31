@@ -17,16 +17,17 @@ class Player {
       
       this.playingSong.url = res.data[0].url
       // store.state.songUrl = this.playingSong.url;
-      store.commit('setPlayingSongs', [this.playingSong.url, this.playIndex])
+      store.commit('setPlayingSongs', [this.playingSong.url, this.playIndex, this.playingSong])
       // store.commit('setPlayState', true)
+      // store.
     })
   }
 
   play(playIndex: number) {
-    console.log(playIndex);
+    // console.log(playIndex);
     this.playIndex = playIndex
     this.playingSong = store.state.songData.playList[this.playIndex]
-    console.log(store.state.songData.playList);
+    // console.log(store.state.songData.playList);
     // console.log(this.playingSong);
     this.getSongUrl(this.playingSong.id)
     // console.log(this.playingSong);
