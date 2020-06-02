@@ -92,7 +92,8 @@ export default class PlayingDetail extends Vue {
   }
   .max-detail {
     height: 100%;
-    overflow-x: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   &.max {
     height: 100%;

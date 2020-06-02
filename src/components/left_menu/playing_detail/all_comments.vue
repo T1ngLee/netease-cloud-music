@@ -3,31 +3,13 @@
     <div class="wonderful-comments">
       <div class="title">精彩评论</div>
       <ul class="commends-list">
-        <li class="commend-item" v-for="item in hotComments" :key="item.commentId">
-          <div class="avatar-box">
-            <img class="avatar" :src="item.user.avatarUrl">
-          </div>
-          <div class="content-box">
-            <div class="content">
-              <span class="user-name">{{item.user.nickname}}</span>
-              <span class="content">{{item.content}}</span>
-            </div>
-            <ul class="plied-list" v-if="item.beReplied.length">
-              <li v-for="pliedItem in item.beReplied" :key="pliedItem.beRepliedCommentId">
-                <span class="plied-user-name">{{pliedItem.user.nickname}}</span>
-                <span class="plied-content">{{pliedItem.content}}</span>
-              </li>
-            </ul>
-            <div class="other">
-              <span class="time">{{item.time}}</span>
-              <div class="operation-box">
-                <span>点赞</span>
-                <span>分享</span>
-                <span>恢复</span>
-              </div>
-            </div> 
-          </div>
-        </li>
+        <comment v-for="item in hotComments" :key="item.commentId" :songId="songId" :item="item"/>
+      </ul>
+    </div>
+    <div class="new-comments">
+      <div class="title">最新评论({{newComments.total}})</div>
+      <ul class="commends-list">
+        <comment v-for="item in newComments.comments" :key="item.commentId" :songId="songId" :item="item"/>
       </ul>
     </div>
   </div>
@@ -35,13 +17,22 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
-import { hotCommend } from '@/api/commend.ts'
-@Component
+import { hotCommend, musicComment } from '@/api/commend.ts'
+import Comment from '@/components/left_menu/playing_detail/comment.vue'
+@Component({
+  components: {
+    Comment
+  }
+})
 export default class AllComments extends Vue {
   hotComments = []
+  newComments = {}
+  songId = 0
 
   @Watch('$store.state.playingSong.id')
   getHotCommends(val: number){
+    this.songId = val
+
     hotCommend({
       id: val,
       type: 0,
@@ -50,9 +41,20 @@ export default class AllComments extends Vue {
     .then((res: any) => {
       this.hotComments = res.hotComments
       console.log(this.hotComments);
-      
     })
     .catch(err =>{
+      console.log(err);
+    })
+  
+    musicComment({
+      id: val,
+      limit: 20
+    })
+    .then((err: any) => {
+      // console.log(err);
+      this.newComments = err
+    })
+    .catch(err => {
       console.log(err);
       
     })
@@ -63,7 +65,7 @@ export default class AllComments extends Vue {
 <style lang="scss" scoped>
 .all-comments-wrap {
   width: 600px;
-  background: violet;
+  // background: violet;
   .wonderful-comments {
     .title {
       width: 100%;
@@ -71,24 +73,13 @@ export default class AllComments extends Vue {
       padding: 5px 0;
       border-bottom: 1px solid rgb(230,231,234);
     }
-    .commends-list {
-      .commend-item {
-        padding: 10px 0;
-        border-bottom: 1px solid rgb(230,231,234);
-        position: relative;
-        .avatar-box {
-          position: absolute;
-          .avatar {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-          }
-        }
-        .content-box {
-          padding-left: 40px;
-          font-size: 12px;
-        }
-      }
+  }
+  .new-comments{
+    .title {
+      width: 100%;
+      font-size: 12px;
+      padding: 5px 0;
+      border-bottom: 1px solid rgb(230,231,234);
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="max-detail-top-wrap">
-    <div class="bg" ref="bg" :style="{background: `url(${$store.state.playingSong.al.picUrl})`}"></div>
+    <div class="bg" ref="bg" :style="{background: `url(${bgUrl})`}"></div>
     <div class="box">
-      <detail-disc/>
+      <detail-disc :picUrl="bgUrl"/>
       <song-info/>
     </div>
   </div>
@@ -19,14 +19,12 @@ import SongInfo from '@/components/left_menu/playing_detail/song_info.vue'
   }
 })
 export default class MaxDetailTop extends Vue {
-  // playingSongInfo = 
+  bgUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591116300048&di=ab41c4613b9eaab653679871227e33e3&imgtype=0&src=http%3A%2F%2Fimage.codes51.com%2Farticle%2Fimage%2F20170407%2F20170407100716_7758.jpg'
 
-  // @Watch('$store.state.playingSong.al.picUrl')
-  // getPlayingSongInfo(val: number){
-  //   this.$refs.bg.style.backgroundImage = 
-  // }
-
-  // get playingSong
+  @Watch('$store.state.playingSong.al.picUrl')
+  getBgUrl(val: any){
+    this.bgUrl = val
+  }
 }
 </script>
 

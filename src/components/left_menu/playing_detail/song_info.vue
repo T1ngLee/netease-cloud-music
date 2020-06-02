@@ -1,14 +1,14 @@
 <template>
   <div class="song-info-wrap">
     <div class="info-top" ref="infoTop">
-      <h3 class="song-name">{{$store.state.playingSong.name}}</h3>
-      <div class="alias">{{$store.state.playingSong.alia[0]}}</div>
+      <h3 class="song-name">{{songInfo.name}}</h3>
+      <div class="alias">{{songInfo.alia[0]}}</div>
       <div class="other">
         <span class="album">
-          专辑: {{$store.state.playingSong.al.name}}
+          专辑: {{songInfo.al.name}}
         </span>
         <span class="artists">
-          歌手: {{$store.state.playingSong.artistStr}}
+          歌手: {{songInfo.artistStr}}
         </span>
         <span class="source">
           来源: 来源
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import Lyric from '@/components/left_menu/playing_detail/lyric.vue'
 @Component({
   components: {
@@ -30,8 +30,22 @@ import Lyric from '@/components/left_menu/playing_detail/lyric.vue'
 export default class SongInfo extends Vue {
   // lll = '一起走过的日子'
   lyricHeight = '0px'
+  songInfo: any = {
+    name: '歌名',
+    alia: [],
+    al: {
+      name: '专辑名'
+    },
+    artistStr: '歌手名'
+  }
+
+  @Watch('$store.state.playingSong', {deep: true})
+  getsongInfo(val: object){
+    this.songInfo = val
+  }
+
   mounted(){
-    this.getLyricHeight()
+    // this.getLyricHeight()
   }
 
   getLyricHeight () {

@@ -6,16 +6,21 @@
       </div>
     </div>
     <div class="disc-box" :class="{paused: !$store.state.playState}" ref="discBox">
-      <img class="cover" :src="$store.state.playingSong.al.picUrl">
+      <img class="cover" :src="picUrl">
       <img class="disc" src="../../../assets/disc.png">
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 @Component
 export default class DetailDisc extends Vue {
+  @Prop() picUrl: any
+
+  // beforeUpdated(){
+    
+  // }
 }
 </script>
 

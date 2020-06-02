@@ -18,7 +18,7 @@ export default class MaxDetailBottom extends Vue {}
 <style lang="scss" scoped>
 .max-detail-bottom-wrap {
   width: 910px;
-  background: turquoise;
+  // background: turquoise;
   margin: 0 auto;
 }
 </style>
