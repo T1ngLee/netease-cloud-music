@@ -8,11 +8,7 @@ export default new Vuex.Store({
   state: {
     songUrl: '',
     player: '',
-    playingSong: {
-      al: {
-        picUrl: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg'
-      }
-    },
+    playingSong: {},
     playState: false,
     songData: new SongDate(),
     playIndex: 2,
@@ -26,7 +22,9 @@ export default new Vuex.Store({
     newProgress: 0,
     loginState: false,
     loginBoxShow: false,
-    userInfo: {}
+    userInfo: {},
+    volume: 0,
+    muted: false
   },
   mutations: {
     setPlayState(state, val){
@@ -57,6 +55,12 @@ export default new Vuex.Store({
     },
     setUserInfo(state, val) {
       state.userInfo = val
+    },
+    setVolume(state, val) {
+      state.volume = val
+    },
+    setMuted(state, val) {
+      state.muted = val
     }
   },
   actions: {

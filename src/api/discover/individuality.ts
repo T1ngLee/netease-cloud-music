@@ -28,3 +28,21 @@ export const getNewSong = (params: any = ''): any => {
     params
   })
 }
+
+// 独家放送 /personalized/privatecontent
+export const privatecontent = (params: any = ''): any => {
+  return request({
+    url: '/personalized/privatecontent',
+    method: 'get',
+    params
+  })
+}
+
+// 推荐mv
+export const mv = (params: any = ''): any => {
+  return request({
+    url: '/personalized/mv',
+    method: 'get',
+    params
+  })
+}

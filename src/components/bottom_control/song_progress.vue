@@ -39,6 +39,7 @@ export default class SongProgress extends Vue {
 
   getProgress(progress: number){
     console.log('father: ', progress)
+    
     this.$store.commit('setNewProgress', progress)
   }
 }
