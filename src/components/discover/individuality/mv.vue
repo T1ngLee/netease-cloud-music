@@ -47,31 +47,32 @@ export default class Mv extends Vue {
 <style lang="scss" scoped>
 .mv-wrap {
   ul {
-    
-    @media (max-width: 849px) {
+    @media (max-width: 1049px) {
       .item {
+        &:nth-child(-n+2) {
+          margin-right: 15px;
+        }
         &:last-child {
           display: none;
         }
         width: calc(100% / 3);
       }
     }
-    @media (min-width: 850px) {
-      &:last-child {
-          display: block;
-        }
+    @media (min-width: 1050px) {
       .item {
+        &:not(:last-child) {
+          margin-right: 15px;
+        }
         width: calc(100% / 4);
       }
     }
     display: flex;
     .item {
-      &:not(:last-child) {
-        margin-right: 15px;
-      }
+      cursor: pointer;
       img {
         width: 100%;
       }
+      font-size: 12px;
     }
   }
 }

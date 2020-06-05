@@ -59,6 +59,11 @@ Vue.use(VueRouter)
     }
   },
   {
+    path: '/playlist/:id',
+    name: 'Playlist',
+    component: ()=> import('@/views/right_content/playlist_detail.vue')
+  },
+  {
     path: '/',
     redirect: {
       name: 'Individuality'

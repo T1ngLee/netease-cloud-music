@@ -12,7 +12,7 @@
         </div>
         <div class="item-name">每日歌曲推荐</div>
       </li>
-      <li class="item" v-for="item in songList" :key="item.id">
+      <router-link tag="li" :to="{name: 'Playlist', params: {id: item.id}}" class="item" v-for="item in songList" :key="item.id">
         <div class="img-box">
           <div class="tip">{{item.copywriter}}</div>
           <div class="play-count">
@@ -25,7 +25,7 @@
           <img :src="item.picUrl">
         </div>
         <div class="item-name">{{item.name}}</div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>

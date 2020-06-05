@@ -46,3 +46,21 @@ export const mv = (params: any = ''): any => {
     params
   })
 }
+
+// 推荐电台
+export const djprogram = (params: any = ''): any => {
+  return request({
+    url: '/personalized/djprogram',
+    method: 'get',
+    params
+  })
+}
+
+// 推荐节目
+export const recommend = (params: any = ''): any => {
+  return request({
+    url: '/program/recommend',
+    method: 'get',
+    params
+  })
+}
