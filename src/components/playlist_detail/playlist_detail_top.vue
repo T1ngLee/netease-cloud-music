@@ -232,6 +232,7 @@ export default class PlaylistDetailTop extends Vue {
     }
     .description {
       font-size: 12px;
+      margin-right: 50px;
       &.hidden {
         overflow:hidden;  //超出文本隐藏      
         text-overflow:ellipsis;  ///超出部分省略号显示      

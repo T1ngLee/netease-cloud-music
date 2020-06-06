@@ -11,6 +11,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import PlaylistDetailTop from '@/components/playlist_detail/playlist_detail_top.vue'
 import { playlistDetail } from '@/api/playList.ts'
+import { songInfo } from '@/api/getSong.ts'
 import PlaylistContent from '@/components/playlist_detail/playlist_detail_content.vue'
 @Component({
   components: {
@@ -64,11 +65,17 @@ export default class PlaylistDetail extends Vue {
         return item.id
       })
 
+      // 结果中的trans是否全，全就直接赋值，不全就取出所有ID请求歌曲详情接口获取后赋值
       if (res.playlist.tracks.length === res.playlist.trackCount) {
         this.tranks = res.playlist.tracks
+      } else {
+        return songInfo({
+          ids: this.tranksIdList.join(',')
+        })
       }
-      console.log(this.tranks);
-      
+    })
+    .then((res: any) => {
+      this.tranks = res.songs
     })
   }
 

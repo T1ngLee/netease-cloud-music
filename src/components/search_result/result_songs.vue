@@ -1,5 +1,5 @@
 <template>
-  <div class="playlist-list-content">
+  <div class="result-song-wrap">
     <table>
       <tr>
         <th>序号</th>
@@ -9,7 +9,7 @@
         <th>专辑</th>
         <th>时长</th>
       </tr>
-      <tr v-for="(item, index) in tranks" :key="item.id" @dblclick="playOneMusic(item.id)" :class="{playing: playingId == item.id}">
+      <tr v-for="(item, index) in result" :key="item.id" @dblclick="playOneMusic(item.id)" :class="{playing: playingId == item.id}">
         <td>
           <span class="id">{{index+1 >= 10 ? index+1 : '0'+(index+1)}}</span>
           <span class="icon">
@@ -19,9 +19,9 @@
         </td>
         <td>操作</td>
         <td>{{item.name}}</td>
-        <td>{{item.ar[0].name}}</td>
-        <td>{{item.al.name}}</td>
-        <td>{{item.dt | handleShowTime}}</td>
+        <td>{{item.artists[0].name}}</td>
+        <td>{{item.album.name}}</td>
+        <td>{{item.duration | handleShowTime}}</td>
       </tr>
     </table>
   </div>
@@ -29,6 +29,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { searchResult } from '@/api/search.ts'
 @Component({
   filters: {
     handleShowTime (time: number): string {
@@ -46,8 +47,29 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
     }
   }
 })
-export default class PlaylistList extends Vue {
-  @Prop() tranks: any
+export default class ResultSongs extends Vue {
+  searchWord!: any
+  result = []
+  created(){
+    this.searchWord = this.$route.params.keyword
+    this.getSongList(this.searchWord)
+  }
+
+  getSongList(searchWord: any){
+    searchResult({
+      limit: 100,
+      type: 1,
+      offset: 0,
+      keywords: searchWord
+    })
+    .then((res: any) => {
+      // this.countStr = res.result.songCount + '首单曲'
+      this.$emit('getCountStr', res.result.songCount + '首单曲')
+      console.log(res);
+      this.result = res.result.songs
+    })
+  }
+  
   playingId = this.$store.state.playingSong.id
 
   playOneMusic(id: number){
@@ -62,7 +84,8 @@ export default class PlaylistList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.playlist-list-content {
+.result-song-wrap {
+  margin-bottom: 40px;
   table {
     border-collapse:collapse;
     width: 100%;

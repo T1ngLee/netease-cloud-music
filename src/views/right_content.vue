@@ -2,7 +2,7 @@
   <div class="right-content-wrap">
     <div class="container">
       <div class="container-width">
-        <router-view></router-view>
+        <router-view :key="key"></router-view>
       </div>
       <play-list v-show="$store.state.playListShowState"/>
     </div>
@@ -17,7 +17,11 @@ import PlayList from '@/components/right_content/play_list.vue'
     PlayList
   }
 })
-export default class RightContent extends Vue {}
+export default class RightContent extends Vue {
+  get key(){
+    return this.$route.path + Math.random()
+  }
+}
 </script>
 
 <style lang="scss" scoped>

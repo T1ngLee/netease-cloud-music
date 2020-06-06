@@ -7,14 +7,13 @@
     </div>
     <div class="search-tip" v-show="isFocus">
       <div class="triangle"></div>
-      <div class="search-history">
-        <div class="title">搜索历史
-          <i class="iconfont icon-shanchu"></i>
+      <div class="search-content">
+        <div class="search-history">
+          <div class="title">搜索历史
+            <i class="iconfont icon-shanchu"></i>
+          </div>
         </div>
-      </div>
-      <div class="search-hot">
-        <!-- iconType 2-上升 5-NEW 1-HOT 0-NULL  -->
-        <div class="title">热搜榜</div>
+        <hot-search/>
       </div>
     </div>
   </div>
@@ -22,18 +21,26 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { hotSearch } from '@/api/search.ts'
+import HotSearch from '@/components/top_bar/hot_search.vue'
 import axios from 'axios'
-@Component
+@Component({
+  components: {
+    HotSearch
+  }
+})
 export default class SearchBar extends Vue {
-  isFocus = false
+  isFocus = true
   mounted(){
-    // axios({
-    //   url: 'http://192.168.5.159:3000/search/hot/detail'
-    // }).then(res => {
-    //   console.log(res);
-    // }).catch(err => {
-    //   console.log(err);
-    // })
+    // this.getHotSearch()
+  }
+
+  getHotSearch(){
+    hotSearch()
+    .then((res: any) => {
+      console.log(res);
+      
+    })
   }
 }
 </script>
@@ -79,8 +86,10 @@ export default class SearchBar extends Vue {
     position: absolute;
     width: 400px;
     min-height: 100px;
+    max-height: 500px;
     background-color: rgb(250, 250, 250);
     top: 100%;
+    display:flex;
     box-shadow: 0 1px 8px 3px rgba($color: #000000, $alpha: 0.1);
     .triangle {
       position: absolute;
@@ -92,6 +101,11 @@ export default class SearchBar extends Vue {
       border-right-color: transparent;
       top: -16px;
       left: 16px;
+    }
+    .search-content {
+      overflow: auto;
+      max-height: 100%;
+      width: 100%;
     }
   }
 }

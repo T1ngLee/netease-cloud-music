@@ -15,7 +15,7 @@
         </span>
       </div>
     </div>
-    <lyric :style="{height: lyricHeight}"/>
+    <!-- <lyric :style="{height: lyricHeight}"/> -->
   </div>
 </template>
 
