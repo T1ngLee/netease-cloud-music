@@ -10,6 +10,10 @@
         <span>{{Math.ceil(info.playCount / 10000)}}万</span>
       </div>
     </div>
+    <div class="hidden-btn" @click="isHidden = !isHidden">
+      <span class="iconfont icon-arrow-up" v-show="isHidden"></span>
+      <span class="iconfont icon-arrow-down" v-show="!isHidden"></span>
+    </div>
     <img class="cover" :src="info.coverImgUrl">
     <div class="info">
       <h3 class="name">{{info.name}}</h3>
@@ -20,11 +24,11 @@
       </div>
       <div class="btn-box">
         <div class="btn play">
-          <button class="play-all">
+          <button class="play-all" @click="playAll()">
             <i class="iconfont icon-bofang"></i>
             <span>播放全部</span>
           </button>
-          <button class="add-list">
+          <button class="add-list" @click="addPlaylist()">
             <i class="iconfont icon-jia"></i>
           </button>
         </div>
@@ -36,7 +40,7 @@
           <i class="iconfont icon-fenxiang"></i>
           <span>分享({{info.shareCount}})</span>
         </button>
-        <button class="btn download" @click="isHidden = !isHidden">
+        <button class="btn download">
           <i class="iconfont icon-xiazai"></i>
           <span>下载全部</span>
         </button>
@@ -50,11 +54,10 @@
           </li>
         </ul>
       </div>
-      <div class="description">
+      <div class="description" :class="{hidden: isHidden}">
         <span>简介：</span>
         <span v-html="initDescription"></span>
       </div>
-      <span class="ellipsis" v-show="isHidden">...</span>
     </div>
   </div>
 </template>
@@ -64,9 +67,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component({
   filters: {
     initTime(time: number): string{
-      const t = new Date(time)
-      // console.log(t);
-      
+      const t = new Date(time)    
       const year = t.getFullYear()
       const month = t.getMonth() + 1 >= 10 ? t.getMonth() + 1  : '0' + (t.getMonth() + 1) 
       const date = t.getDate() >= 10 ? t.getDate() : '0' + t.getDate()
@@ -76,11 +77,21 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 })
 export default class PlaylistDetailTop extends Vue {
   @Prop() info: any
+  @Prop() tranksIdList: any
 
   isHidden = true
   
   get initDescription(){
     return this.info.description.replace(/\n/g,"<br/>")
+  }
+
+  // 播放歌单
+  playAll(){
+    this.$store.state.songData.getSongItem(this.tranksIdList, 1)
+  }
+
+  addPlaylist(){
+    this.$store.state.songData.getSongItem(this.tranksIdList, 2)
   }
 }
 </script>
@@ -112,6 +123,16 @@ export default class PlaylistDetailTop extends Vue {
       &:first-child {
         border-right: 1px solid rgb(230,231,234);
       }
+    }
+  }
+  .hidden-btn {
+    position: absolute;
+    right: 0;
+    top: 160px;
+    cursor: pointer;
+    .iconfont {
+      font-size: 20px;
+      font-weight: 700;
     }
   }
   .cover {
@@ -209,11 +230,18 @@ export default class PlaylistDetailTop extends Vue {
         }
       }
     }
-    .tags,
     .description {
       font-size: 12px;
+      &.hidden {
+        overflow:hidden;  //超出文本隐藏      
+        text-overflow:ellipsis;  ///超出部分省略号显示      
+        display:-webkit-box;  //弹性盒模型 
+        -webkit-box-orient:vertical;  //上下垂直      
+        -webkit-line-clamp:2;  //自定义行数
+      }
     }
     .tags {
+      font-size: 12px;
       margin-top: 20px;
       margin-bottom: 5px;
     }

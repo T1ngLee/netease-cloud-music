@@ -1,8 +1,9 @@
 <template>
   <div class="playlist-wrap">
-    歌单{{id}}
-    <playlist-detail-top :info="info"/>
-    fghjk
+    <!-- 歌单{{id}} -->
+    <playlist-detail-top :info="info" :tranksIdList="tranksIdList"/>
+    <playlist-content :tranks="tranks"/>
+    <!-- fghjk -->
   </div>
 </template>
 
@@ -10,9 +11,11 @@
 import { Vue, Component } from 'vue-property-decorator'
 import PlaylistDetailTop from '@/components/playlist_detail/playlist_detail_top.vue'
 import { playlistDetail } from '@/api/playList.ts'
+import PlaylistContent from '@/components/playlist_detail/playlist_detail_content.vue'
 @Component({
   components: {
-    PlaylistDetailTop
+    PlaylistDetailTop,
+    PlaylistContent
   }
 })
 export default class PlaylistDetail extends Vue {
@@ -30,19 +33,8 @@ export default class PlaylistDetail extends Vue {
     description: '',
     subscribedCount: 0
   }
-  // info = {
-  //   coverImgUrl: 'coverImgUrl',
-  //   name: 'name',
-  //   id: 'id',
-  //   creator: 'creator',
-  //   createTime: 'createTime',
-  //   shareCount: 'shareCount',
-  //   playCount: 'playCount',
-  //   trackCount: 'trackCount',
-  //   tags: 'tags',
-  //   description: 'description',
-  //   subscribedCount: 'subscribedCount'
-  // }
+  tranks = []
+  tranksIdList = []
   created(){
     this.id = this.$route.params.id
     this.getDetail(this.id)
@@ -54,6 +46,7 @@ export default class PlaylistDetail extends Vue {
     })
     .then((res: any) => {
       console.log(res);
+
       ({coverImgUrl: this.info.coverImgUrl,
         name: this.info.name,
         id: this.info.id,
@@ -66,8 +59,15 @@ export default class PlaylistDetail extends Vue {
         description: this.info.description,
         subscribedCount: this.info.subscribedCount
       } = res.playlist)
-      // (this.info = res.playlist)
-      // console.log(this.info);
+
+      this.tranksIdList = res.playlist.trackIds.map((item: any) =>{
+        return item.id
+      })
+
+      if (res.playlist.tracks.length === res.playlist.trackCount) {
+        this.tranks = res.playlist.tracks
+      }
+      console.log(this.tranks);
       
     })
   }

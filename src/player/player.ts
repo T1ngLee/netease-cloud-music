@@ -19,7 +19,9 @@ class Player {
       // store.state.songUrl = this.playingSong.url;
       store.commit('setPlayingSongs', [this.playingSong.url, this.playIndex, this.playingSong])
       // store.commit('setPlayState', true)
-      // store.
+      if (this.playingSong.url == null) {
+        return this.after()
+      }
     })
   }
 
@@ -72,8 +74,6 @@ class Player {
     if(randomNum === store.state.playIndex) {
       return this.randomCut()
     }
-    // console.log(randomNum);
-    
     this.play(randomNum)
   }
 }

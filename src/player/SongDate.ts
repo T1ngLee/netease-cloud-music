@@ -26,7 +26,7 @@ class SongDate {
   }
 
   /**
-   * 
+   * 将音乐加入播放列表
    * @param id 歌曲id，可以是number类型，也可以是数组
    * @param mode 模式，0：单曲，1：播放歌单，2：添加歌单
    */
