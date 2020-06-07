@@ -2,9 +2,12 @@
   <div class="right-content-wrap">
     <div class="container">
       <div class="container-width">
-        <router-view :key="key"></router-view>
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive" :key="key"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive" :key="key"></router-view>
       </div>
-      <play-list v-show="$store.state.playListShowState"/>
+      <!-- <play-list v-show="$store.state.playListShowState"/> -->
     </div>
   </div>
 </template>
@@ -13,6 +16,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import PlayList from '@/components/right_content/play_list.vue'
 @Component({
+  name: 'rightContent',
   components: {
     PlayList
   }

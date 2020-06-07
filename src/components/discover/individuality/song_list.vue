@@ -19,7 +19,7 @@
             <i class="iconfont icon-erji"></i>
             <span>{{item.playCount | calcPlayCount}} 万</span>
           </div>
-          <div class="play-btn">
+          <div class="play-btn" @click.stop="playAll(item.id)">
             <i class="iconfont icon-bofang"></i>
           </div>
           <img :src="item.picUrl">
@@ -34,6 +34,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import TitleBar from '@/components/common/title_bar.vue'
 import { getSongList } from '@/api/discover/individuality.ts'
+import { playlistDetail } from '@/api/playList.ts'
 @Component({
   name: 'SongList',
   filters: {
@@ -57,6 +58,23 @@ export default class SongList extends Vue {
     }).then((res: any) => {
       console.log(res);
       this.songList = res.result
+    })
+  }
+
+  // 播放歌单
+  playAll(id: number){
+    console.log(id)
+    let tranksIdList: any = []
+    playlistDetail({
+      id: id
+    })
+    .then((res: any) => {
+      console.log(res);
+
+      tranksIdList = res.playlist.trackIds.map((item: any) =>{
+        return item.id
+      })
+      this.$store.state.songData.getSongItem(tranksIdList, 1)
     })
   }
 

@@ -24,9 +24,17 @@ export default class AudioWrap extends Vue {
   onSongUrlChange(val: string, oldVal: string){
     this.audio.src = val
     console.log(val);
-    this.$store.commit('setPlayState', true)
-    this.audio.play()
+    // this.$store.commit('setPlayState', true)
+    // this.audio.play()
   }
+
+  // @Watch('$store.state.playIndex')
+  // onSongUrlChange(val: string, oldVal: string){
+  //   this.audio.src = this.$store.state.songUrl
+  //   // console.log(val);
+  //   this.$store.commit('setPlayState', true)
+  //   this.audio.play()
+  // }
 
   @Watch('$store.state.playState')
   playState(val: string){

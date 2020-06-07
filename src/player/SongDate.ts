@@ -37,9 +37,7 @@ class SongDate {
     } else {
       idStr = id.join(',')
     }
-    // console.log(this.playList);
 
-    // let getplayList: Array<SongItem>
     songInfo({
       ids: idStr
     }).then((res: any) => {

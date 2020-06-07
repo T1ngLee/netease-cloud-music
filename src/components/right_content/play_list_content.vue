@@ -58,6 +58,7 @@ export default class PlayListContent extends Vue {
     .list {
       .item {
         display: flex;
+        // line-height: 20px;
         &:nth-child(2n+0) {
           background: rgba($color: #999999, $alpha: .1);
         }

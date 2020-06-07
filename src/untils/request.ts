@@ -29,9 +29,9 @@ service.interceptors.response.use(
   (error) => {
     console.log('响应失败:' + error)
     // console.log(error.response.status)
-    if (error.response.status === 501) {
-      return Promise.reject(501)
-    }
+    // if (error.response.status === 501) {
+    //   return Promise.reject(501)
+    // }
     return Promise.reject(error)
   }
 )

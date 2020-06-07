@@ -30,7 +30,7 @@ import axios from 'axios'
   }
 })
 export default class SearchBar extends Vue {
-  isFocus = true
+  isFocus = false
   mounted(){
     // this.getHotSearch()
   }

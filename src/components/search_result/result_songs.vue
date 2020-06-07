@@ -18,9 +18,9 @@
           </span>
         </td>
         <td>操作</td>
-        <td>{{item.name}}</td>
-        <td>{{item.artists[0].name}}</td>
-        <td>{{item.album.name}}</td>
+        <td v-html="item.name"></td>
+        <td v-html="item.artists[0].name"></td>
+        <td v-html="item.album.name"></td>
         <td>{{item.duration | handleShowTime}}</td>
       </tr>
     </table>
@@ -66,10 +66,27 @@ export default class ResultSongs extends Vue {
       // this.countStr = res.result.songCount + '首单曲'
       this.$emit('getCountStr', res.result.songCount + '首单曲')
       console.log(res);
-      this.result = res.result.songs
+      this.result = res.result.songs.map((item: any) => {
+        item.name = this.brightKeyword(item.name)
+        item.artists[0].name = this.brightKeyword(item.artists[0].name)
+        item.album.name = this.brightKeyword(item.album.name)
+        return item
+      })
+      // this.result = 
+      console.log(this.result);
     })
   }
   
+  brightKeyword(val: any){
+    const keyword = this.searchWord
+    if (val.indexOf(keyword) !== -1) {
+      return val.replace(keyword, `<font color='#42cccc'>${keyword}</font>`)
+    } else {
+      return val
+    }
+  }
+  
+
   playingId = this.$store.state.playingSong.id
 
   playOneMusic(id: number){

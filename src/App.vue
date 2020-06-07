@@ -5,8 +5,13 @@
     <LoginOrSignIN v-if="loginBoxShow"/>
     <top-bar/>
     <div class="center-box">
-      <left-menu/>
-      <right-content/>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+      <!-- <left-menu/>
+      <right-content/> -->
+      <!-- <home/> -->
     </div>
     <bottom-control/>
   </div>
@@ -16,19 +21,21 @@
 import { Vue, Component } from 'vue-property-decorator'
 import TopBar from '@/views/top_bar.vue'
 import BottomControl from '@/views/bottom_control.vue'
-import LeftMenu from '@/views/left_menu.vue'
-import RightContent from '@/views/right_content.vue'
+// import LeftMenu from '@/views/left_menu.vue'
+// import RightContent from '@/views/right_content.vue'
 import AudioWrap from '@/views/audio.vue'
 import LoginOrSignIN from '@/components/common/login_or_signin.vue'
 import LoginInfo from '@/mixins/LoginInfo.ts'
+// import Home from '@/views/home.vue'
 @Component({
   components: {
     TopBar,
     BottomControl,
-    LeftMenu,
-    RightContent,
+    // LeftMenu,
+    // RightContent,
     AudioWrap,
-    LoginOrSignIN
+    LoginOrSignIN,
+    // Home
   },
   mixins: [LoginInfo]
 })
@@ -48,7 +55,7 @@ export default class App extends Vue {
   .center-box {
     height: calc(100vh - 100px);
     width: 100vw;
-    background: yellow;
+    // background: yellow;
   }
 }
 </style>

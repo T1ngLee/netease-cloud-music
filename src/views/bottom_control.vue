@@ -57,11 +57,17 @@ export default class BottomControl extends Vue {
   }
 
   changePlayState(){
-    if (this.$store.state.playState) {
-      this.$store.commit('setPlayState', false)
+    if(this.$store.state.playIndex === -1) {
+      this.player.play(0)
     } else {
-      this.$store.commit('setPlayState', true)
+      this.$store.commit('setPlayState', !this.$store.state.playState)
     }
+
+    // if (this.$store.state.playState) {
+    //   this.$store.commit('setPlayState', false)
+    // } else {
+    //   this.$store.commit('setPlayState', true)
+    // }
   }
 
   changePlayListShowState () {
@@ -121,12 +127,14 @@ export default class BottomControl extends Vue {
     padding-left: 15px;
     top: 0;
     left: 200px;
+    padding-right: 20px;
     // padding-left: 200px;
     // background: yellow;
     width: calc(100% - 200px);
     height: 100%;
     flex: 0 0 300px;
     display: flex;
+    justify-content: space-between;
   }
 }
 </style>

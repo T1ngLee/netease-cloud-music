@@ -13,12 +13,11 @@ class Player {
     songUrl({
       id: songId
     }).then((res: any) => {
-      console.log(res);
-      
       this.playingSong.url = res.data[0].url
-      // store.state.songUrl = this.playingSong.url;
+
       store.commit('setPlayingSongs', [this.playingSong.url, this.playIndex, this.playingSong])
-      // store.commit('setPlayState', true)
+      store.commit('setPlayState', true)
+
       if (this.playingSong.url == null) {
         return this.after()
       }
@@ -26,13 +25,9 @@ class Player {
   }
 
   play(playIndex: number) {
-    // console.log(playIndex);
     this.playIndex = playIndex
     this.playingSong = store.state.songData.playList[this.playIndex]
-    // console.log(store.state.songData.playList);
-    // console.log(this.playingSong);
     this.getSongUrl(this.playingSong.id)
-    // console.log(this.playingSong);
   }
   // 自动切歌
   autoCut () {
@@ -54,7 +49,7 @@ class Player {
   }
   // 上一首
   before(){
-    if(store.state.playIndex === 0) {
+    if(store.state.playIndex <= 0) {
       this.play(store.state.songData.playList.length-1)
     } else {
       this.play(store.state.playIndex-1)

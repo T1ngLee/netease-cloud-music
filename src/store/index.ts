@@ -11,7 +11,7 @@ export default new Vuex.Store({
     playingSong: {},
     playState: false,
     songData: new SongDate(),
-    playIndex: 2,
+    playIndex: -1,
     playListShowState: false,
     songProgress: {
       currentTime: '00:00',
@@ -34,6 +34,8 @@ export default new Vuex.Store({
       state.playListShowState = val
     },
     setPlayingSongs(state, argument){
+      console.log(argument);
+      
       state.songUrl = argument[0]
       state.playIndex = argument[1]
       state.playingSong = argument[2]

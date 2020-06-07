@@ -1,15 +1,15 @@
 <template>
   <div class="max-detail-top-wrap">
-    <div class="bg" ref="bg" :style="{background: `url(${bgUrl})`}"></div>
+    <div class="bg" ref="bg" :style="{background: `url(${songInfo.al.picUrl})`}"></div>
     <div class="box">
-      <detail-disc :picUrl="bgUrl"/>
-      <song-info/>
+      <detail-disc :picUrl="songInfo.al.picUrl"/>
+      <song-info :songInfo="songInfo"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 import DetailDisc from '@/components/left_menu/playing_detail/detail_disc.vue'
 import SongInfo from '@/components/left_menu/playing_detail/song_info.vue'
 @Component({
@@ -19,12 +19,20 @@ import SongInfo from '@/components/left_menu/playing_detail/song_info.vue'
   }
 })
 export default class MaxDetailTop extends Vue {
-  bgUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591116300048&di=ab41c4613b9eaab653679871227e33e3&imgtype=0&src=http%3A%2F%2Fimage.codes51.com%2Farticle%2Fimage%2F20170407%2F20170407100716_7758.jpg'
+  // bgUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591116300048&di=ab41c4613b9eaab653679871227e33e3&imgtype=0&src=http%3A%2F%2Fimage.codes51.com%2Farticle%2Fimage%2F20170407%2F20170407100716_7758.jpg'
 
-  @Watch('$store.state.playingSong.al.picUrl')
-  getBgUrl(val: any){
-    this.bgUrl = val
-  }
+  @Prop({
+    default: {
+      al: {
+        picUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591116300048&di=ab41c4613b9eaab653679871227e33e3&imgtype=0&src=http%3A%2F%2Fimage.codes51.com%2Farticle%2Fimage%2F20170407%2F20170407100716_7758.jpg'
+      }
+    }
+  }) songInfo!: any
+
+  // @Watch('$store.state.playingSong.al.picUrl')
+  // getBgUrl(val: any){
+  //   this.bgUrl = val
+  // }
 }
 </script>
 
@@ -32,7 +40,7 @@ export default class MaxDetailTop extends Vue {
 .max-detail-top-wrap {
   width: 100vw;
   height: 480px;
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
   .bg{
     // content: '';

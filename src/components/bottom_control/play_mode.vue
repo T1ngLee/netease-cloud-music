@@ -11,12 +11,18 @@ export default class PalyMode extends Vue {
   modeClass = ['icon-shunxubofang','icon-liebiaoxunhuan','icon-suijibofang','icon-danquxunhuan']
 
   mounted(){
+    const playMode = window.localStorage.getItem('playMode')
+    if(playMode !== null) {
+      this.$store.commit('setPlayerMode', parseInt(playMode))
+    } else {
+      this.$store.commit('setPlayerMode', 0)
+    }
     (this.$refs.modeIcon as any).className = `iconfont ${this.modeClass[this.$store.state.playerMode]}`
   }
 
   changeMode(){
     const nowMode = this.$store.state.playerMode
-    let newMode!: number
+    let newMode!: any
     if (nowMode === 3) {
       newMode = 0
     } else {
@@ -24,6 +30,7 @@ export default class PalyMode extends Vue {
     }
     (this.$refs.modeIcon as any).className = `iconfont ${this.modeClass[newMode]}`
     this.$store.commit('setPlayerMode', newMode)
+    window.localStorage.setItem('playMode', newMode)
   }
 }
 </script>

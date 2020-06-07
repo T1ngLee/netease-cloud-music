@@ -1,5 +1,8 @@
 <template>
   <div class="song-info-wrap">
+    <div class="close" @click="$router.go(-1)">
+      <i class="iconfont icon-suoxiao"></i>
+    </div>
     <div class="info-top" ref="infoTop">
       <h3 class="song-name">{{songInfo.name}}</h3>
       <div class="alias">{{songInfo.alia[0]}}</div>
@@ -15,12 +18,12 @@
         </span>
       </div>
     </div>
-    <!-- <lyric :style="{height: lyricHeight}"/> -->
+    <lyric :style="{height: lyricHeight}"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 import Lyric from '@/components/left_menu/playing_detail/lyric.vue'
 @Component({
   components: {
@@ -30,22 +33,23 @@ import Lyric from '@/components/left_menu/playing_detail/lyric.vue'
 export default class SongInfo extends Vue {
   // lll = '一起走过的日子'
   lyricHeight = '0px'
-  songInfo: any = {
-    name: '歌名',
-    alia: [],
-    al: {
-      name: '专辑名'
-    },
-    artistStr: '歌手名'
-  }
+  // songInfo: any = {
+  //   name: '歌名',
+  //   alia: [],
+  //   al: {
+  //     name: '专辑名'
+  //   },
+  //   artistStr: '歌手名'
+  // }
 
-  @Watch('$store.state.playingSong', {deep: true})
-  getsongInfo(val: object){
-    this.songInfo = val
-  }
+  @Prop() songInfo!: any
+  // @Watch('$store.state.playingSong', {deep: true})
+  // getsongInfo(val: object){
+  //   this.songInfo = val
+  // }
 
   mounted(){
-    // this.getLyricHeight()
+    this.getLyricHeight()
   }
 
   getLyricHeight () {
@@ -62,10 +66,10 @@ export default class SongInfo extends Vue {
 .song-info-wrap {
   width: 480px;
   height: 100%;
-  // background: salmon;
   margin-left: 100px;
   z-index: 5;
-  // over
+  position: relative;
+  overflow: visible;
   .info-top {
     padding-top: 25px;
     .song-name {
@@ -100,6 +104,20 @@ export default class SongInfo extends Vue {
         float: right;
         margin-right: 15px;
       }
+    }
+  }
+  .close {
+    position: fixed;
+    margin-top: 20px;
+    margin-left: 500px;
+    border: 1px solid rgb(230,231,234);
+    height: 27px;
+    padding: 0 5px;
+    border-radius: 5px;
+    background: rgb(233, 233, 235);
+    cursor: pointer;
+    .iconfont{
+      font-size: 25px;
     }
   }
 }

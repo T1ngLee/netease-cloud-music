@@ -1,13 +1,24 @@
 <template>
   <div class="song-list-btn-wrap">
-    <span class="iconfont icon-bofangliebiao" @click="isClick()"></span>
+    <span class="iconfont icon-bofangliebiao" @click="isShow = !isShow"></span>
+    <play-list class="play-list" @close="close" v-show="isShow"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-@Component
+import PlayList from '@/components/right_content/play_list.vue'
+@Component({
+  components: {
+    PlayList
+  }
+})
 export default class SongListBtn extends Vue {
+  isShow = false
+
+  close(val: boolean){
+    this.isShow = false
+  }
   isClick () {
     const state = this.$store.state.playListShowState
     this.$store.commit('setPlayListShowState', !state)
@@ -19,8 +30,9 @@ export default class SongListBtn extends Vue {
 .song-list-btn-wrap {
   width: 20px;
   height: 100%;
-  line-height: 50px;
-  .iconfont {
+  // line-height: 50px;
+  margin-top: 14px;
+  .icon-bofangliebiao {
     font-size: 17px;
   }
 }

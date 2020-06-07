@@ -42,6 +42,41 @@ export default class SongProgress extends Vue {
     
     this.$store.commit('setNewProgress', progress)
   }
+
+  created(){
+    const played = window.localStorage.getItem('played')
+    console.log(JSON.parse(played as any));
+    
+    if(played == null || played == '{}') {
+      this.$store.commit('setPlayingSongs', ['',-1,{}])
+    } else {
+      const playedObj = JSON.parse(played as any)
+      const playedArr = Object.values(playedObj)
+      this.$store.commit('setPlayingSongs', playedArr)
+    }
+
+    window.addEventListener('unload', this.savePlayed)
+  }
+
+  // destroyed(){
+  //   const store = this.$store.state
+  //   const played = {
+  //     songUrl: store.songUrl,
+  //     playIndex: store.playIndex,
+  //     playingSong: store.playingSong
+  //   }
+  //   window.localStorage.setItem('played', JSON.stringify(played))
+  // }
+
+  savePlayed(){
+    const store = this.$store.state
+    const played = {
+      songUrl: store.songUrl,
+      playIndex: store.playIndex,
+      playingSong: store.playingSong
+    }
+    window.localStorage.setItem('played', JSON.stringify(played))
+  }
 }
 </script>
 

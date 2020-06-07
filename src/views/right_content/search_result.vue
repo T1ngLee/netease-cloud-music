@@ -29,19 +29,19 @@ export default class SearchResult extends Vue {
     },
     {
       name: '视频',
-      pathName: 'ResultAnchor'
+      pathName: 'ResultVideo'
     },
     {
       name: '歌单',
-      pathName: 'ResultLyric'
-    },
-    {
-      name: '歌词',
       pathName: 'ResultPlaylist'
     },
     {
+      name: '歌词',
+      pathName: 'ResultLyric'
+    },
+    {
       name: '主播电台',
-      pathName: 'ResultVideo'
+      pathName: 'ResultAnchor'
     },
     {
       name: '用户',

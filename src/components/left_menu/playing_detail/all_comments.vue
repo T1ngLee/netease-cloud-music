@@ -27,12 +27,20 @@ import Comment from '@/components/left_menu/playing_detail/comment.vue'
 export default class AllComments extends Vue {
   hotComments = []
   newComments = {}
-  songId = 0
+  songId = this.$store.state.playingSong.id
+
+  mounted(){
+    this.getComments(this.songId)
+  }
 
   @Watch('$store.state.playingSong.id')
   getHotCommends(val: number){
     this.songId = val
+    this.getComments(val)
+  }
 
+  getComments(val: number){
+    console.log(val);
     hotCommend({
       id: val,
       type: 0,
@@ -51,12 +59,10 @@ export default class AllComments extends Vue {
       limit: 20
     })
     .then((err: any) => {
-      // console.log(err);
       this.newComments = err
     })
     .catch(err => {
       console.log(err);
-      
     })
   }
 }

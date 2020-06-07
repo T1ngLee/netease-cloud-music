@@ -1,7 +1,10 @@
 <template>
   <div class="discover-wrap">
     <discover-router-link/>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
   <div class="lyric-wrap" ref="wrap">
-    <div class="lyric-box">
+    <div class="lyric-box" ref="box">
       <ul class="lyric-list" ref="list">
-        <li class="lyric-item" v-for="(item, index) in backupLyricList" :key="index" :class="{active: index==showIndex}">
+        <li class="lyric-item" v-for="(item, index) in backupLyricList"
+        :key="index" :class="{active: index==showIndex}" :ref="index==showIndex?'active':''">
           <!-- <div class="lyric">歌词</div>
           <div class="tlyric">翻译歌词</div> -->
           <span>{{item.time}} | {{item.str}}</span>
@@ -78,25 +79,50 @@ export default class Lyric extends Vue {
   showIndex = -1
   @Watch('$store.state.songProgress.currentTime')
   lyricAnimation(val: any){
-    // console.log(typeof val);
-    if(val >= (this.lyricList[0] as any).time){
-      // this.nowTime = 
-      this.showIndex ++
-      this.lyricList.shift()
-    } 
+    for (let i = 0; i <= this.lyricList.length; i++) {
+      if (this.lyricList[i].time > val) {
+        // console.log(this.lyricList[i].time);
+        this.showIndex = --i
+        break
+      }
+    }
     this.lyricMove()
-    
   }
 
+  aaa = -1
   lyricMove(){
     // if()
-    const a = (this.$refs.wrap as any).offsetHeight
-    const b = (this.$refs.list as any).offsetHeight
-    const c = (this.$refs.list as any).getBoundingClientRect().top
+    // const a = (this.$refs.active as any).offsetHeight
+    // const b = (this.$refs.list as any).offsetTop
+    // const c = (this.$refs.list as any).getBoundingClientRect().top
     // const d = (this.$refs.list as any).scrollTop
-    const d = (this.$refs.wrap as any).scrollTop
-    console.log(a, b, c,d);
+    const d = (this.$refs.box as any).scrollTop
+    // console.dir(this.$refs.active);
+    // console.log(this.$refs.list)
+    const active = document.querySelector('.active')
+    // console.dir(d);
+    // if(this.showIndex <= 4) {
+    //   return
+    // }
+    // if(active.offsetTop <= 250 || this.aaa === this.showIndex) {
+    //   return
+    // }
+    // this.$refs.box.scrollTop = d + 30
+    // this.aaa = this.showIndex
+
+    // console.log(this.$refs.box.clientHeight);
     
+    console.log(this.$refs.box.clientHeight, active.offsetTop);
+    
+    if(this.$refs.box.clientHeight/2 > active.offsetTop) {
+      this.$refs.box.scrollTop = 0 
+    } else {
+      this.$refs.box.scrollTop = active.offsetTop - this.$refs.box.clientHeight/2
+    }
+    
+    // (active as any).offsetTop = 300
+    // document.
+    // this.$refs.box.scrollTop = 1200
   }
 }
 </script>
@@ -110,11 +136,14 @@ export default class Lyric extends Vue {
     height: 100%;
     // height: 50%;
     overflow: auto;
+    // position: relative;
     border-right: 1px solid rgb(192, 193, 194);
     .lyric-list {
     font-size: 14px;
     // transform: translateY(-200px);
-    top: 200px;
+    // margin-top: -200px;
+    // position: absolute;
+    // top: -200px;
     .lyric-item {
       padding-bottom: 8px;
       height: 30px;

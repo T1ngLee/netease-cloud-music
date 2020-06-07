@@ -28,5 +28,9 @@ import DjProgram from '@/components/discover/individuality/dj_program.vue'
     DjProgram
   }
 })
-export default class Individuality extends Vue {}
+export default class Individuality extends Vue {
+  actived(){
+    console.log('keepAlive')
+  }
+}
 </script>

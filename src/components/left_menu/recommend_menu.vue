@@ -2,12 +2,12 @@
   <div class="recommend-menu-wrap">
     <div class="title">推荐</div>
     <ul class="btn-list">
-      <router-link tag="li" to="/discover" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'Discover'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-yinle"></i>
         <span>发现音乐</span>
       </router-link>
-      <router-link tag="li" to="/bb" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'SongList'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-xinhao"></i>
         <span>私人FM</span>

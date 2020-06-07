@@ -5,7 +5,7 @@
         <span class="btn play-list active">播放列表</span>
         <span class="btn history-list">历史记录</span>
       </div>
-      <span class="iconfont icon-chacha"></span>
+      <span class="iconfont icon-chacha" @click="close"></span>
     </div>
     <play-list-content/>
   </div>
@@ -20,7 +20,9 @@ import PlayListContent from '@/components/right_content/play_list_content.vue'
   }
 })
 export default class PlayList extends Vue {
-  
+  close(){
+    this.$emit('close', false)
+  }
 }
 </script>
 
@@ -33,6 +35,7 @@ export default class PlayList extends Vue {
   z-index: 5;
   right: 0;
   bottom: 50px;
+  // line-height: 
   box-shadow: -1px -1px 3px 1px rgba($color: #000000, $alpha: .3);
   .top-wrap {
     height: 35px;
