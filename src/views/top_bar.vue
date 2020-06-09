@@ -3,7 +3,7 @@
     <h1 class="logo">网易云音乐
       <img src="../assets/top_bar_logo.png">
     </h1>
-    <nav-btn class="nav-btn"/>
+    <!-- <nav-btn class="nav-btn"/> -->
     <search-bar/>
     <div class="top-bar-right">
       <user-info/>

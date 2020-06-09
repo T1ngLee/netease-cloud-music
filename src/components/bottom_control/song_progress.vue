@@ -1,8 +1,8 @@
 <template>
   <div class="song-progress-wrap">
-    <span class="now-time">{{progress.currentTime || 0 | handleShowTime}}</span>
+    <span class="now-time">{{progress.currentTime | handleShowTime}}</span>
     <progress-bar  class="progress-bar" :progressBarWidth="'100%'" :nowProgress="progress.progress" @getProgress="getProgress"/>
-    <span class="all-time">{{progress.duration || 0 | handleShowTime}}</span>
+    <span class="all-time">{{progress.duration | handleShowTime}}</span>
   </div>
 </template>
 
@@ -30,11 +30,15 @@ import ProgressBar from '@/components/common/progress_bar.vue'
   }
 })
 export default class SongProgress extends Vue {
-  progress = {}
-  @Watch('$store.state.songProgress', {deep: true})
-  changeProgress(val: object){
-    console.log('正在监听')
-    this.progress = val
+  // progress = {}
+  // @Watch('$store.state.songProgress', {deep: true})
+  // changeProgress(val: object){
+  //   console.log('正在监听')
+  //   this.progress = val
+  // }
+
+  get progress() {
+    return this.$store.state.songProgress
   }
 
   getProgress(progress: number){

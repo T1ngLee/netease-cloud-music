@@ -14,11 +14,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import PlayList from '@/components/right_content/play_list.vue'
+// import PlayList from '@/components/right_content/play_list.vue'
 @Component({
   name: 'rightContent',
   components: {
-    PlayList
+    // PlayList
   }
 })
 export default class RightContent extends Vue {

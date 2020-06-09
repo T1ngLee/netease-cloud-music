@@ -1,9 +1,9 @@
 <template>
   <div class="nav-btn-wrap">
-    <span class="retreat-btn">
+    <span class="retreat-btn" @click="back">
       <i class="iconfont icon-xiangzuo"></i>
     </span>
-    <span class="advance-btn">
+    <span class="advance-btn" @click="forward">
       <i class="iconfont icon-jiantou-left"></i>
     </span>
   </div>
@@ -12,7 +12,25 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 @Component
-export default class NavBtn extends Vue {}
+export default class NavBtn extends Vue {
+  // get aaa(){
+
+    
+  // }
+
+  back(){
+    window.history.back()
+    const numberOfEntries = window.history.length
+    console.log(window.history)
+    console.log(numberOfEntries)
+  }
+
+  forward(){
+    window.history.forward()
+    const numberOfEntries = window.history.length
+    console.log(numberOfEntries)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

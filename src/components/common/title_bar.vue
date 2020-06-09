@@ -1,7 +1,7 @@
 <template>
   <div class="title-bar-wrap">
     <span class="title">{{titleName}}</span>
-    <span class="more-btn">更多></span>
+    <router-link tag="span" class="more-btn" :to="{name: pathName}">更多></router-link>
   </div>
 </template>
 
@@ -9,8 +9,11 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component
 export default class TitleBar extends Vue {
-  @Prop({default: 'asasdasd'})
+  @Prop({default: '标题名称'})
   titleName!: string 
+
+  @Prop({default: '/'})
+  pathName!: string
 }
 </script>
 
@@ -21,9 +24,6 @@ export default class TitleBar extends Vue {
   border-bottom: 1px solid rgb(230,231,234);
   line-height: 35px;
   margin-bottom: 10px;
-  .title {
-    
-  }
   .more-btn {
     float: right;
   }

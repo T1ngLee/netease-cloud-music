@@ -43,6 +43,7 @@ export default class PrivateContent extends Vue {
 <style lang="scss" scoped>
 .private-content-wrap {
   width: 100%;
+  margin-bottom: 40px;
   ul {
     width: 100%;
     display: flex;

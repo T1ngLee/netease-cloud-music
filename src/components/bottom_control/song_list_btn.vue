@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import PlayList from '@/components/right_content/play_list.vue'
+import PlayList from '@/components/bottom_control/song_list/play_list.vue'
 @Component({
   components: {
     PlayList

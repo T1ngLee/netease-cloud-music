@@ -80,7 +80,7 @@ export default class Lyric extends Vue {
   @Watch('$store.state.songProgress.currentTime')
   lyricAnimation(val: any){
     for (let i = 0; i <= this.lyricList.length; i++) {
-      if (this.lyricList[i].time > val) {
+      if ((this.lyricList[i] as any).time > val) {
         // console.log(this.lyricList[i].time);
         this.showIndex = --i
         break
@@ -91,38 +91,17 @@ export default class Lyric extends Vue {
 
   aaa = -1
   lyricMove(){
-    // if()
-    // const a = (this.$refs.active as any).offsetHeight
-    // const b = (this.$refs.list as any).offsetTop
-    // const c = (this.$refs.list as any).getBoundingClientRect().top
-    // const d = (this.$refs.list as any).scrollTop
     const d = (this.$refs.box as any).scrollTop
-    // console.dir(this.$refs.active);
-    // console.log(this.$refs.list)
-    const active = document.querySelector('.active')
-    // console.dir(d);
-    // if(this.showIndex <= 4) {
-    //   return
-    // }
-    // if(active.offsetTop <= 250 || this.aaa === this.showIndex) {
-    //   return
-    // }
-    // this.$refs.box.scrollTop = d + 30
-    // this.aaa = this.showIndex
+    const active: any = document.querySelector('.active')
 
-    // console.log(this.$refs.box.clientHeight);
+    const box: any = this.$refs.box
+
     
-    console.log(this.$refs.box.clientHeight, active.offsetTop);
-    
-    if(this.$refs.box.clientHeight/2 > active.offsetTop) {
-      this.$refs.box.scrollTop = 0 
+    if(box.clientHeight/2 > active.offsetTop) {
+      box.scrollTop = 0 
     } else {
-      this.$refs.box.scrollTop = active.offsetTop - this.$refs.box.clientHeight/2
+      box.scrollTop = active.offsetTop - box.clientHeight/2
     }
-    
-    // (active as any).offsetTop = 300
-    // document.
-    // this.$refs.box.scrollTop = 1200
   }
 }
 </script>

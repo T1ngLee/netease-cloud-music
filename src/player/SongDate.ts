@@ -95,8 +95,6 @@ class SongDate {
     }).catch((err: any) => {
       console.log(err)
     })
-
-    
   }
   // 将要显示在页面上的时间格式化
   handleShowTime (time: number): string {

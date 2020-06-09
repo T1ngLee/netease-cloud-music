@@ -36,36 +36,49 @@ export default class AudioWrap extends Vue {
   //   this.audio.play()
   // }
 
-  @Watch('$store.state.playState')
-  playState(val: string){
+  @Watch('playState')
+  play(val: string){
     if (val) {
       this.audio.play()
       console.log('播放');
-      this.listenAudioTime()
     } else {
       this.audio.pause()
       console.log('暂停');
-      clearInterval(this.timer)
+    }
+  }
+
+  get playState(){
+    const state = this.$store.state
+    if(state.playState && state.songUrl) {
+      console.log('进到get了')
+      return new Date().getTime()
+    } else {
+      return false
     }
   }
 
   // 监听AUDIO时间
-  listenAudioTime(){
-    this.timer = setInterval(()=>{
-      // 进度时间
-      const duration = this.audio.duration
-      const currentTime = this.audio.currentTime
-      const songProgress: any = {}
-      songProgress.progress = (currentTime / duration * 100) + '%';
-      songProgress.currentTime = currentTime
-      songProgress.duration = duration
-      this.$store.commit('setSongProgress', songProgress)
+  @Watch('$store.state.playState')
+  listenAudioTime(val: boolean){
+    if(val){
+      this.timer = setInterval(()=>{
+        // 进度时间
+        const duration = this.audio.duration
+        const currentTime = this.audio.currentTime
+        const songProgress: any = {}
+        songProgress.progress = (currentTime / duration * 100) + '%';
+        songProgress.currentTime = currentTime
+        songProgress.duration = duration
+        this.$store.commit('setSongProgress', songProgress)
 
-      // 如果当前时间大于等于歌曲时长，则根据播放模式切歌，顺序，随机，单曲, 列表
-      if(currentTime >= duration) {
-        this.player.autoCut()
-      }
-    }, 1000)
+        // 如果当前时间大于等于歌曲时长，则根据播放模式切歌，顺序，随机，单曲, 列表
+        if(currentTime >= duration) {
+          this.player.autoCut()
+        }
+      }, 1000)
+    } else {
+      clearInterval(this.timer)
+    }
   }
 
   // 监听进度条设置的进度

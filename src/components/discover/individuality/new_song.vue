@@ -1,6 +1,6 @@
 <template>
   <div class="new-song-wrap">
-    <title-bar :titleName="'最新音乐'"/>
+    <title-bar :titleName="'最新音乐'" :pathName="'NewSong'"/>
     <div class="new-song-container">
       <ul class="new-song-left">
         <li class="item" v-for="(item, index) in leftSong" :key="item.id">
@@ -115,6 +115,7 @@ export default class NewSong extends Vue {
 <style lang="scss" scoped>
 .new-song-wrap {
   width: 100%;
+  margin-bottom: 40px;
   .new-song-container {
     width: 100%;
     display: flex;

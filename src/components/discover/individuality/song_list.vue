@@ -1,6 +1,6 @@
 <template>
   <div class="song-list-wrap">
-    <title-bar :titleName="'推荐歌单'"/>
+    <title-bar :titleName="'推荐歌单'" :pathName="'SongList'"/>
     <ul class="song-list-container">
       <li class="item tody-discover-song">
         <div class="img-box">

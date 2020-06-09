@@ -52,6 +52,7 @@ export default class SearchBar extends Vue {
   display: flex;
   align-items: center;
   position: relative;
+  margin-left: 20px;
   .input-box {
     width: 100%;
     height: 20px;

@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
-import PlayListContent from '@/components/right_content/play_list_content.vue'
+import PlayListContent from '@/components/bottom_control/song_list/play_list_content.vue'
 @Component({
   components: {
     PlayListContent
@@ -35,7 +35,6 @@ export default class PlayList extends Vue {
   z-index: 5;
   right: 0;
   bottom: 50px;
-  // line-height: 
   box-shadow: -1px -1px 3px 1px rgba($color: #000000, $alpha: .3);
   .top-wrap {
     height: 35px;
@@ -46,14 +45,10 @@ export default class PlayList extends Vue {
     justify-content: center;
     align-items: center;
     position: relative;
-    // font-size: 0;
     .iconfont {
-      // font-size: 0;
       position: absolute;
       display: inline-block;
       right: 10px;
-      // top: 50%;
-      // transform: translateY(-50%);
       height: 100%;
       line-height: 35px;
     }

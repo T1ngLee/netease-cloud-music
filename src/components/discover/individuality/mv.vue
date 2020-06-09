@@ -46,6 +46,7 @@ export default class Mv extends Vue {
 
 <style lang="scss" scoped>
 .mv-wrap {
+  margin-bottom: 40px;
   ul {
     @media (max-width: 1049px) {
       .item {

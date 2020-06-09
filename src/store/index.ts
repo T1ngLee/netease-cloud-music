@@ -14,8 +14,8 @@ export default new Vuex.Store({
     playIndex: -1,
     playListShowState: false,
     songProgress: {
-      currentTime: '00:00',
-      duration: '00:00',
+      currentTime: 0,
+      duration: 0,
       progress: '0'
     },
     playerMode: 2,
