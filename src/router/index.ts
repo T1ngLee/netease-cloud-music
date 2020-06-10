@@ -33,38 +33,38 @@ Vue.use(VueRouter)
         path: '/home/discover',
         name: 'Discover',
         meta: {keepAlive: false},
-        component: () => import('@/views/right_content/discover.vue'),
+        component: () => import('@/views/home/discover.vue'),
         children: [
           {
             path: '/home/discover/individuality',
             name: 'Individuality',
             meta: {keepAlive: false},
-            component: () => import('@/views/right_content/discover/individuality.vue')
+            component: () => import('@/views/home/discover/individuality.vue')
           },
           {
             path: '/home/discover/songList',
             name: 'SongList',
-            component: () => import('@/views/right_content/discover/song_list.vue')
+            component: () => import('@/views/home/discover/song_list.vue')
           },
           {
             path: '/home/discover/anchor',
             name: 'Anchor',
-            component: () => import('@/views/right_content/discover/anchor.vue')
+            component: () => import('@/views/home/discover/anchor.vue')
           },
           {
             path: '/home/discover/rankingList',
             name: 'RankingList',
-            component: () => import('@/views/right_content/discover/ranking_list.vue')
+            component: () => import('@/views/home/discover/ranking_list.vue')
           },
           {
             path: '/home/discover/singer',
             name: 'Singer',
-            component: () => import('@/views/right_content/discover/singer.vue')
+            component: () => import('@/views/home/discover/singer.vue')
           },
           {
             path: '/home/discover/newSong',
             name: 'NewSong',
-            component: () => import('@/views/right_content/discover/new_song.vue')
+            component: () => import('@/views/home/discover/new_song.vue')
           }
         ],
         redirect: {
@@ -72,14 +72,34 @@ Vue.use(VueRouter)
         }
       },
       {
+        path: '/home/privatefm',
+        name: 'PrivateFm',
+        component: () => import('@/views/home/private_fm.vue')
+      },
+      {
+        path: '/home/look',
+        name: 'Look',
+        component: () => import('@/views/home/look.vue')
+      },
+      {
+        path: '/home/friends',
+        name: 'Friends',
+        component: () => import('@/views/home/friends.vue')
+      },
+      {
+        path: '/home/video',
+        name: 'Video',
+        component: () => import('@/views/home/video.vue')
+      },
+      {
         path: '/playlist/:id',
         name: 'Playlist',
-        component: ()=> import('@/views/right_content/playlist_detail.vue')
+        component: ()=> import('@/views/home/playlist_detail.vue')
       },
       {
         path: '/home/searchresult/:keyword',
         name: 'SearchResult',
-        component: ()=> import('@/views/right_content/search_result.vue'),
+        component: ()=> import('@/views/home/search_result.vue'),
         children: [
           {
             path: '/home/searchresult/:keyword/songs',

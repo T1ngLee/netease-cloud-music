@@ -1,7 +1,7 @@
 <template>
   <div class="individuality-wrap">
     <!-- individuality -->
-    <!-- <banner/> -->
+    <banner/>
     <song-list/>
     <private-content/>
     <new-song/>

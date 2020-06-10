@@ -12,7 +12,7 @@ export default class TitleBar extends Vue {
   @Prop({default: '标题名称'})
   titleName!: string 
 
-  @Prop({default: '/'})
+  @Prop({default: 'Individuality'})
   pathName!: string
 }
 </script>

@@ -4,10 +4,7 @@ import { songUrl } from '@/api/getSong.ts'
 class Player {
   playingSong!: any
   playIndex = -1
-  // constructor(songInfo: object) {
-  //   this.playingSong = songInfo
-  //   this.playingSong.url = this.getSongUrl(this.playingSong.id)
-  // }
+
   // 获取音乐URL
   getSongUrl(songId: number): void {
     songUrl({

@@ -1,8 +1,7 @@
 <template>
-  <div class="playing-detail-wrap" :class="{max: isMax}">
-    <router-link class="mini-detail" :to="{name: 'Song'}">
+  <div class="playing-detail-wrap">
+    <router-link class="mini-detail" tag="li" :to="{name: 'Song'}">
       <img :src="songInfo.al.picUrl">
-      <!-- @click="isMax = !isMax" -->
       <div class="info">
         <div class="top">
           <span class="song-name text">{{songInfo.name}}</span>
@@ -14,11 +13,6 @@
         </div>
       </div>
     </router-link>
-    <!-- <div class="max-detail">
-      <max-detail-top/>
-      <button @click="isMax = !isMax">asdasd</button>
-      <max-detail-bottom/>
-    </div> -->
   </div>
 </template>
 
@@ -33,20 +27,7 @@ import MaxDetailBottom from '@/components/left_menu/playing_detail/max_detail_bo
   }
 })
 export default class PlayingDetail extends Vue {
-  isMax = false
-  // songInfo = {
-  //   name: '歌名',
-  //   artistStr: '歌手名',
-  //   al: {
-  //     picUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591116300048&di=ab41c4613b9eaab653679871227e33e3&imgtype=0&src=http%3A%2F%2Fimage.codes51.com%2Farticle%2Fimage%2F20170407%2F20170407100716_7758.jpg'
-  //   }
-  // }
-
-  // @Watch('$store.state.playingSong', {deep: true})
-  // getSongInfo(val: any){
-  //   this.songInfo = val
-  // }
-
+  // isMax = false
   get songInfo(){
     if(JSON.stringify(this.$store.state.playingSong) == '{}' || !this.$store.state.playingSong) {
       return {
@@ -83,10 +64,8 @@ export default class PlayingDetail extends Vue {
       display: block;
       height: 100%;
       width: 46px;
-      background: blue;
       z-index: 1;
       cursor: pointer;
-      // position: absolute;
     }
     .info {
       padding-left: 62px;

@@ -7,22 +7,22 @@
         <i class="iconfont icon-yinle"></i>
         <span>发现音乐</span>
       </router-link>
-      <router-link tag="li" :to="{name: 'SongList'}" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'PrivateFm'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-xinhao"></i>
         <span>私人FM</span>
       </router-link>
-      <router-link tag="li" to="/cc" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'Look'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-zhibo"></i>
         <span>LOOK直播</span>
       </router-link>
-      <router-link tag="li" to="/dd" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'Video'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-shipin"></i>
         <span>视频</span>
       </router-link>
-      <router-link tag="li" to="/ee" class="btn discover-btn" active-class="active">
+      <router-link tag="li" :to="{name: 'Friends'}" class="btn discover-btn" active-class="active">
         <span class="active-show"></span>
         <i class="iconfont icon-pengyou"></i>
         <span>朋友</span>
@@ -61,7 +61,6 @@ export default class RecommendMenu extends Vue {}
         display: inline-block;
         height: 100%;
         width: 2px;
-        // background-color: rgb(198,47,47);
         background-color: #f5f5f7;
         position: absolute;
         left: 0;

@@ -128,33 +128,45 @@ export default class Banner extends Vue {
     
     .left {
       // bottom: 0;
+      background: black;
       left: 0;
       z-index: 0;
-      background: yellow;
-      transition: all 5s ease;
+      // background: yellow;
+      transition: all .5s ease;
       visibility: visible;
       transform: translateX(0);
+      opacity: .5;
+      // position: relative;
+      &::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // background: rgba($color: #000000, $alpha: .2);
+        background: black;
+      }
     }
     .right {
       // bottom: 0;
+      background: black;
       left: unset;
       z-index: 1;
       transform: translateX(0);
       right: 0;
       position: absolute;
-      background: blue;
+      // background: blue;
       visibility: visible;
-      transition: all 5s ease;
-      
+      transition: all .5s ease;
+      opacity: .5;
     }
     .center {
       z-index: 999;
       transform-origin: 0 bottom;
-      // left: 50%;
-      // transform: translateX(-50%);
       transform: scale(1.1) translateX(-50%);
       background: red;
-      transition: all 5s ease;
+      transition: all .5s ease;
       visibility: visible;
     }
   }
