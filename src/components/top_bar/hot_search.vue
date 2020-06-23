@@ -29,18 +29,13 @@ export default class HotSearch extends Vue {
   }
 
   search(keyword: any){
-    
-    
     this.$router.push({name: 'SearchResult', params: {keyword: keyword}})
-    console.log(keyword);
   }
 
   getHotSearch(){
     hotSearch()
     .then((res: any) => {
-      
       this.hotList = res.data
-      console.log(res);
     })
   }
 }

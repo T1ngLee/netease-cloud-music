@@ -2,7 +2,7 @@
   <div class="search-bar-wrap">
     <div class="input-box">
       <input type="text" class="search-input" :placeholder="isFocus ? '' : '搜索音乐，视频，歌词，电台'"
-      @focus="isFocus = true" @blur="isFocus = false" autocomplete="off" spellcheck="false">
+      @focus="isFocus = true" @blur="isFocus = false" autocomplete="off" spellcheck="false" v-model="keyword" @keydown.enter="search()">
       <i class="iconfont icon-fangdajing" :class="{'focused': isFocus}"></i>
     </div>
     <div class="search-tip" v-show="isFocus">
@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { hotSearch } from '@/api/search.ts'
 import HotSearch from '@/components/top_bar/hot_search.vue'
 import axios from 'axios'
 @Component({
@@ -31,16 +30,10 @@ import axios from 'axios'
 })
 export default class SearchBar extends Vue {
   isFocus = false
-  mounted(){
-    // this.getHotSearch()
-  }
+  keyword!: any
 
-  getHotSearch(){
-    hotSearch()
-    .then((res: any) => {
-      console.log(res);
-      
-    })
+  search(keyword: any){
+    this.$router.push({name: 'SearchResult', params: {keyword: this.keyword}})
   }
 }
 </script>

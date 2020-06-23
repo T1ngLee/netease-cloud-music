@@ -1,12 +1,13 @@
 <template>
   <div class="banner-wrap">
     <ul class="img-list">
-			<div class="after-btn" @click="after()"></div>
+			<!-- <div class="after-btn" @click="after()"></div> -->
 			<li :class="item.class" v-for="item in bannersList" @mouseover="clearInterval(timer)" 
       @mouseout="interval()" :key="item.imageUrl">
         <img :src="item.imageUrl">
+        <span class="type-title" :style="{backgroundColor: item.titleColor}">{{item.typeTitle}}</span>
       </li>
-			<div class="before-btn" @click="before()"></div>
+			<!-- <div class="before-btn" @click="before()"></div> -->
 		</ul>
 		<ul class="btn-list">
 			<li class="btn" :class="({active: index == active})" v-for="(item, index) in bannersList" 
@@ -42,7 +43,7 @@ export default class Banner extends Vue {
     })
   }
   mounted() {
-    // this.interval()
+    this.interval()
   }
   handleClass() {
     for(let i=0;i<this.bannersList.length;i++){
@@ -99,14 +100,12 @@ export default class Banner extends Vue {
 .banner-wrap {
   position: relative;
   width: 100%;
-  // background: chartreuse;
-  height: 300px;
-  overflow-x: hidden;
+  height: 220px;
+  margin: 30px 0;
   .img-list {
-    // margin: 0 auto;
-    // height: 200;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     position: relative;
     .item {
       height: 200px;
@@ -124,45 +123,40 @@ export default class Banner extends Vue {
         height: 100%;
         width: 100%;
       }
+      .type-title {
+        color: white;
+        position: absolute;
+        bottom: 10px;
+        right: -2px;
+        font-size: 12px;
+        padding: 1px 5px 1px 10px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
     }
     
     .left {
-      // bottom: 0;
       background: black;
       left: 0;
       z-index: 0;
-      // background: yellow;
       transition: all .5s ease;
       visibility: visible;
       transform: translateX(0);
       opacity: .5;
-      // position: relative;
-      &::after{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        // background: rgba($color: #000000, $alpha: .2);
-        background: black;
-      }
     }
     .right {
-      // bottom: 0;
       background: black;
       left: unset;
       z-index: 1;
       transform: translateX(0);
       right: 0;
       position: absolute;
-      // background: blue;
       visibility: visible;
       transition: all .5s ease;
       opacity: .5;
     }
     .center {
-      z-index: 999;
+      z-index: 9;
       transform-origin: 0 bottom;
       transform: scale(1.1) translateX(-50%);
       background: red;
@@ -174,12 +168,14 @@ export default class Banner extends Vue {
     display: flex;
     width: 540px;
     margin: 0 auto;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: center;
+    margin-top: 10px;
+    z-index: 99999999;
     .btn {
-      height: 5px;
+      height: 2px;
       width: 20px;
-      border: 1px solid #000;
+      background: #ddd;
+      margin: 0 3px;
     }
     .btn.active {
       background: red;
