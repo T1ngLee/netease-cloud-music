@@ -50,7 +50,7 @@ export default class AllComments extends Vue {
       this.hotComments = res.hotComments
       console.log(this.hotComments);
     })
-    .catch(err =>{
+    .catch((err: any) =>{
       console.log(err);
     })
   
@@ -61,7 +61,7 @@ export default class AllComments extends Vue {
     .then((err: any) => {
       this.newComments = err
     })
-    .catch(err => {
+    .catch((err: any) => {
       console.log(err);
     })
   }

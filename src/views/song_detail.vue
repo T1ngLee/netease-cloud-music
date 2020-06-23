@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import MaxDetailTop from '@/components/left_menu/playing_detail/max_detail_top.vue'
 import MaxDetailBottom from '@/components/left_menu/playing_detail/max_detail_bottom.vue'
 @Component({

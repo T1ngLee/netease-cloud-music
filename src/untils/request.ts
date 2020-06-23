@@ -26,7 +26,7 @@ service.interceptors.response.use(
       return res
     }
   },
-  (error) => {
+  (error: any) => {
     console.log('响应失败:' + error)
     // console.log(error.response.status)
     // if (error.response.status === 501) {
