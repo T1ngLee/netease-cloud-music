@@ -31,11 +31,12 @@ class SongDate {
    * @param mode 模式，0：单曲，1：播放歌单，2：添加歌单
    */
   getSongItem(id: number | number[], mode: number){
-    let idStr: number | string
-    if(typeof id == 'number') {
+    let idStr: any
+    // if(typeof id == 'number') {
+    if(mode === 0) {
       idStr = id
     } else {
-      idStr = id.join(',')
+      idStr = (id as any).join(',')
     }
 
     songInfo({

@@ -1,13 +1,13 @@
 <template>
   <div class="banner-wrap">
-    <ul class="img-list">
-			<!-- <div class="after-btn" @click="after()"></div> -->
+    <ul class="img-list" @click="itemClick()">
 			<li :class="item.class" v-for="item in bannersList" @mouseover="clearInterval(timer)" 
-      @mouseout="interval()" :key="item.imageUrl">
+      @mouseout="interval()" :key="item.imageUrl" :data="item.targetId || item.url">
         <img :src="item.imageUrl">
         <span class="type-title" :style="{backgroundColor: item.titleColor}">{{item.typeTitle}}</span>
       </li>
-			<!-- <div class="before-btn" @click="before()"></div> -->
+      <span class="toggle-btn before iconfont icon-xiangzuo"></span>
+      <span class="toggle-btn after iconfont icon-jiantou-left"></span>
 		</ul>
 		<ul class="btn-list">
 			<li class="btn" :class="({active: index == active})" v-for="(item, index) in bannersList" 
@@ -93,6 +93,30 @@ export default class Banner extends Vue {
     this.handleClass()
     this.interval()
   }
+  itemClick(e: any){
+    e = e || window.event
+
+    if (e.target.className.includes('item left') || e.target.className.includes('before')) {
+      this.before()
+    } else if (e.target.className.includes('item right') || e.target.className.includes('after')) {
+      this.after()
+    } else {
+      console.dir(e.target.parentNode.getAttribute('data'))
+      const data = e.target.parentNode.getAttribute('data')
+      // console.log(/^http/.test('http://'))
+      if (!/^http/.test(data)) {
+        (this.$store.state as any).songData.getSongItem(data, 0)
+      } else {
+        console.log('进入')
+        window.open(data, '_blank')
+      }
+    }
+    // if (item.targetType === 1) {
+    //   (this.$store.state as any).songData.getSongItem(item.targetId, 0)
+    // } else {
+    //   window.open(item.url, '_blank')
+    // }
+  }
 }
 </script>
 
@@ -107,6 +131,11 @@ export default class Banner extends Vue {
     height: 100%;
     overflow: hidden;
     position: relative;
+    &:hover {
+      .toggle-btn {
+        visibility: visible;
+      }
+    }
     .item {
       height: 200px;
       width: 540px;
@@ -119,6 +148,7 @@ export default class Banner extends Vue {
       transition: all .5s ease;
       z-index: 0;
       transform: translateX(-50%);
+      cursor: pointer;
       img {
         height: 100%;
         width: 100%;
@@ -135,6 +165,19 @@ export default class Banner extends Vue {
       }
     }
     
+    .left,
+    .right {
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba($color: #000000, $alpha: 0.6);
+      }
+    }
+
     .left {
       background: black;
       left: 0;
@@ -142,7 +185,6 @@ export default class Banner extends Vue {
       transition: all .5s ease;
       visibility: visible;
       transform: translateX(0);
-      opacity: .5;
     }
     .right {
       background: black;
@@ -153,7 +195,6 @@ export default class Banner extends Vue {
       position: absolute;
       visibility: visible;
       transition: all .5s ease;
-      opacity: .5;
     }
     .center {
       z-index: 9;
@@ -162,6 +203,21 @@ export default class Banner extends Vue {
       background: red;
       transition: all .5s ease;
       visibility: visible;
+    }
+    .toggle-btn {
+      visibility: hidden;
+      position: absolute;
+      top: 50%;
+      color: white;
+      font-size: 25px;
+      z-index: 10;
+      cursor: pointer;
+      &.after {
+        right: 10px;
+      }
+      &.before {
+        left: 10px;
+      }
     }
   }
   .btn-list {

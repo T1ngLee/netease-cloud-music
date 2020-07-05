@@ -75,8 +75,6 @@ export default class NewSong extends Vue {
       this.newSongLsit = this.handleSongList(res.result)
       console.log(this.newSongLsit);
       this.oneRowCount = this.newSongLsit.length / 2
-      // this.showSongList[0] = this.newSongLsit.slice(0, this.oneRowCount)
-      // this.showSongList[1] = this.newSongLsit.slice(this.oneRowCount)
       this.leftSong = this.newSongLsit.slice(0, this.oneRowCount)
       this.rightSong = this.newSongLsit.slice(this.oneRowCount)
     })
@@ -158,8 +156,12 @@ export default class NewSong extends Vue {
             }
           }
           .info {
+            width: calc(100% - 50px);
             .song-name {
               font-size: 13px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
               .name {
                 color: black;
               }
