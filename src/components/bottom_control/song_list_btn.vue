@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import PlayList from '@/components/bottom_control/song_list/play_list.vue'
 @Component({
   components: {
@@ -16,12 +16,32 @@ import PlayList from '@/components/bottom_control/song_list/play_list.vue'
 export default class SongListBtn extends Vue {
   isShow = false
 
-  close(val: boolean){
+  close(){
     this.isShow = false
   }
   isClick () {
     const state = this.$store.state.playListShowState
     this.$store.commit('setPlayListShowState', !state)
+  }
+
+  /**
+   * 点击播放列表以外的区域关闭播放列表
+   */
+  @Watch('isShow')
+  bodyClick(newVal: boolean){
+    if (newVal) {
+      const dom = document.querySelector('.play-list-content-wrap')
+      const btn = document.querySelector('.icon-bofangliebiao')
+      document.body.onclick = (e) => {
+        e = e || window.event;
+        const target = e.target || e.srcElement;
+        if(target != dom && target != btn){
+          this.close()
+        }
+      }
+    } else {
+      document.body.onclick = null
+    }
   }
 }
 </script>

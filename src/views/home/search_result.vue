@@ -1,6 +1,6 @@
 <template>
   <div class="search-result-wrap">
-    <span class="tip">搜索"{{searchWord}}"，找到{{countStr}}</span>
+    <span class="tip">搜索"{{searchWord}}"，找到 {{countStr}}</span>
     <ul class="btn-box">
       <router-link tag="li" class="btn" v-for="item in btnList" :key="item.name"
       active-class="active" :to="{name: item.pathName}">{{item.name}}</router-link>

@@ -9,9 +9,9 @@
         <th>专辑</th>
         <th>时长</th>
       </tr>
-      <tr v-for="(item, index) in result" :key="item.id" @dblclick="playOneMusic(item.id)" :class="{playing: playingId == item.id}">
+      <tr v-for="(item) in result" :key="item.id" @dblclick="playOneMusic(item.id)" :class="{playing: playingId == item.id}">
         <td>
-          <span class="id">{{index+1 >= 10 ? index+1 : '0'+(index+1)}}</span>
+          <span class="index">{{item.index}}</span>
           <span class="icon">
             <i class="iconfont icon-yinliang" v-show="!$store.state.playState"></i>
             <i class="iconfont icon-yinliang1" v-show="$store.state.playState"></i>
@@ -24,12 +24,14 @@
         <td>{{item.duration | handleShowTime}}</td>
       </tr>
     </table>
+    <toggle-page :count="songCount" @getSongList="getSongList"/>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { searchResult } from '@/api/search.ts'
+import TogglePage from '@/components/common/toggle_page.vue'
 @Component({
   filters: {
     handleShowTime (time: number): string {
@@ -45,35 +47,39 @@ import { searchResult } from '@/api/search.ts'
       }
       return minute + ':' + second
     }
+  },
+  components: {
+    TogglePage
   }
 })
 export default class ResultSongs extends Vue {
   searchWord!: any
   result = []
+  songCount = 0
   created(){
     this.searchWord = this.$route.params.keyword
-    this.getSongList(this.searchWord)
+    this.getSongList()
   }
 
-  getSongList(searchWord: any){
+  getSongList(offset = 0){
     searchResult({
       limit: 100,
       type: 1,
-      offset: 0,
-      keywords: searchWord
+      offset: offset * 100,
+      keywords: this.searchWord
     })
     .then((res: any) => {
-      // this.countStr = res.result.songCount + '首单曲'
-      this.$emit('getCountStr', res.result.songCount + '首单曲')
-      console.log(res);
-      this.result = res.result.songs.map((item: any) => {
+      this.songCount = res.result.songCount
+      this.$emit('getCountStr', this.songCount + ' 首单曲')
+      this.result = res.result.songs.map((item: any, index: number) => {
+        index = (index + 1) + (offset * 100)
+        item.index = index >= 10 ? index : '0' + index
+
         item.name = this.brightKeyword(item.name)
         item.artists[0].name = this.brightKeyword(item.artists[0].name)
         item.album.name = this.brightKeyword(item.album.name)
         return item
       })
-      // this.result = 
-      console.log(this.result);
     })
   }
   
@@ -110,8 +116,9 @@ export default class ResultSongs extends Vue {
     tr {
       font-size: 13px;
       overflow: hidden;
-      .id {
+      .index {
         display: block;
+        font-size: 11px;
       }
       .icon {
         display: none;
@@ -123,7 +130,7 @@ export default class ResultSongs extends Vue {
         }
       }
       &.playing {
-        .id {
+        .index {
           display: none;
         }
         .icon {

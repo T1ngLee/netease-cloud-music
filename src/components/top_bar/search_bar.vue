@@ -30,7 +30,7 @@ import axios from 'axios'
 })
 export default class SearchBar extends Vue {
   isFocus = false
-  keyword!: any
+  keyword = ''
 
   search(keyword: any){
     this.$router.push({name: 'SearchResult', params: {keyword: this.keyword}})
