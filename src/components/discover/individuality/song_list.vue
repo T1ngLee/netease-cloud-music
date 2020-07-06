@@ -194,8 +194,8 @@ export default class SongList extends Vue {
           z-index: 2;
           height: 16px;
           font-size: 10px;
-          width: 50%;
-          background-image: linear-gradient(to right, rgba(255,255,255,.1), rgba(0,0,0,.5));
+          width: 80%;
+          background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,.5));
           text-align: right;
           padding-right: 3px;
           color: white;
